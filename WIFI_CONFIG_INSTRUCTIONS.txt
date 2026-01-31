@@ -1,0 +1,42 @@
+===============================================
+AMHR-PD FIRMWARE - WiFi Configuration Required
+===============================================
+
+✅ DONE: Backend IP address updated to 10.83.60.93 in all 3 firmware files
+✅ DONE: Python dependencies installed
+
+⚠️ TODO: You must manually update WiFi credentials before uploading firmware
+
+FILES TO EDIT (all 3 required):
+--------------------------------
+1. D:\AMHR-PD\code\amhrpd\amhrpd-firmware\amhrpd_firmware\ESPCAM.ino (lines 57-58)
+2. D:\AMHR-PD\code\amhrpd\amhrpd-firmware\amhrpd_firmware\ESPSERVO.ino (lines 26-27)
+3. D:\AMHR-PD\code\amhrpd\amhrpd-firmware\amhrpd_firmware\ESPWHEEL.ino (lines 34-35)
+
+FIND THESE LINES:
+-----------------
+const char WIFI_SSID[] = "YOUR_SSID";  // TODO: Replace with your WiFi name
+const char WIFI_PASSWORD[] = "YOUR_PASSWORD";  // TODO: Replace with your WiFi password
+
+REPLACE WITH:
+-------------
+const char WIFI_SSID[] = "YourActualWiFiName";
+const char WIFI_PASSWORD[] = "YourActualWiFiPassword";
+
+IMPORTANT NOTES:
+----------------
+⚠️ ESP32 ONLY supports 2.4GHz WiFi (not 5GHz)
+⚠️ Use the SAME WiFi network that your computer (10.83.60.93) is connected to
+⚠️ Keep the double quotes around the values
+⚠️ WiFi is case-sensitive
+
+EXAMPLE:
+--------
+const char WIFI_SSID[] = "MyHomeNetwork";
+const char WIFI_PASSWORD[] = "MySecurePassword123";
+
+===============================================
+
+After updating WiFi credentials, you can upload the firmware to your ESP32 devices.
+
+See GAP_ANALYSIS.md for detailed upload instructions.

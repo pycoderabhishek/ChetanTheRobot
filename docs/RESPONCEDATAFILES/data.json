@@ -1,0 +1,57 @@
+{
+    "intent":
+        {
+               "courses":
+               {
+                         "bca":
+                         {
+                            "fullname":"Bachelors of computer applications",
+                            "duration":"3 years",
+                            "fees":
+                                   {
+                                     "semester":
+                                                  {
+                                                    "1st semester":"30000",
+                                                    "2nd semester":"30000",
+                                                    "3rd semester":"30000",
+                                                    "4th semester":"30 thousand 150",
+                                                    "5th semester":"30 thousand",
+                                                    "6th semester":"30 thousand 300"
+                                                  }
+                                   }
+                           }
+                        
+
+                },
+                                
+
+                "department":
+                           {
+                             "Computer Science":
+                             {
+                               "head":"Dr. Shalini lamba",
+                               "blockname": "Science block"
+                             },
+                             "Mathematics":
+                             {
+                               "head":"Dr. Rajesh Kumar",
+                               "blockname": "Math block"
+                             }
+
+                            },
+                "counter":
+                            {
+                              "admission":"Counter 1",
+                              "fees":"Counter 2",
+                              "inquiry":"Counter 3",
+                              "id card":"Counter 4"
+                            } ,  
+                "principal":
+                            {
+                              "name":"Prof. Devendra  kumar singh",
+                              "contact":"+1234567890",
+                               "room":"42"
+
+                            }
+        }                
+}
