@@ -60,6 +60,7 @@ http://<BACKEND_HOST>:8000/
 - Devices: GET /api/devices
 - Command dispatch: POST /api/command
 - Logs: GET /api/command-logs, GET /api/system/logs
+- Project status: GET /api/status
 
 ## Testing
 - Audio pipeline scripts: docs/AUDIOTESTCOD
