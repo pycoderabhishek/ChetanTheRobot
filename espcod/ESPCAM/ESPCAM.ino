@@ -4,14 +4,18 @@
 #include <HTTPClient.h>
 #include "driver/i2s.h"
 #include "esp_heap_caps.h"
+#include "discovery.h"
 
 const char WIFI_SSID[] = "YOUR_SSID";
 const char WIFI_PASSWORD[] = "YOUR_PASSWORD";
 
-const char BACKEND_HOST[] = "10.83.60.246";
-const uint16_t BACKEND_PORT = 8000;
+// Backend host is resolved at runtime by the discovery system.
+// Do NOT hardcode an IP address here.
+char BACKEND_HOST[64] = "";
+uint16_t BACKEND_PORT = 8000;
 
-const char DEVICE_ID[] = "camcontroller";
+// Device ID is generated from the MAC address in setup().
+char DEVICE_ID[32] = "espcam";
 const char DEVICE_TYPE[] = "esp32s3cam";
 const char FIRMWARE_VERSION[] = "2.0.0";
 
@@ -381,7 +385,8 @@ void setup_websocket() {
   if (millis() - last_ws_attempt < WS_RECONNECT_INTERVAL) {
     return;
   }
-  webSocket.begin(BACKEND_HOST, BACKEND_PORT, "/ws/camcontroller");
+  String ws_path = String("/ws/") + DEVICE_ID;
+  webSocket.begin(BACKEND_HOST, BACKEND_PORT, ws_path.c_str());
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
   webSocket.enableHeartbeat(15000, 3000, 2);
@@ -441,7 +446,7 @@ void handle_ws_message(char* payload, size_t len) {
   } else if (strcmp(message_type, "audio_chunk") == 0) {
     const char* b64 = doc["audio_base64"];
     if (!b64) return;
-    bool is_last = doc["is_last"] | false;
+    bool is_last = doc["is_last"].as<bool>();
     uint8_t* decoded = nullptr;
     size_t decoded_len = decode_base64(b64, &decoded);
     if (decoded && decoded_len > 0) {
@@ -489,15 +494,52 @@ void webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
 void setup() {
   Serial.begin(115200);
   delay(1000);
+
+  // Generate a unique device ID from the last 4 bytes of the MAC address
+  uint8_t mac[6];
+  WiFi.macAddress(mac);
+  snprintf(DEVICE_ID, sizeof(DEVICE_ID), "espcam_%02x%02x%02x%02x",
+           mac[2], mac[3], mac[4], mac[5]);
+  Serial.printf("[SETUP] Device ID: %s\n", DEVICE_ID);
+
   setup_audio();
   calibrate_wake_threshold();
+
+  // Connect to WiFi first (discovery requires network access)
   setup_wifi();
+
+  // Wait for WiFi before running discovery
+  Serial.print("[SETUP] Waiting for WiFi");
+  unsigned long wifi_start = millis();
+  while (WiFi.status() != WL_CONNECTED && millis() - wifi_start < 20000) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.println();
+
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.printf("[SETUP] WiFi connected: %s\n", WiFi.localIP().toString().c_str());
+    system_state = WIFI_CONNECTED;
+
+    // Auto-discover the backend — fills BACKEND_HOST and BACKEND_PORT
+    discover_backend(BACKEND_HOST, sizeof(BACKEND_HOST), &BACKEND_PORT);
+    Serial.printf("[SETUP] Backend: %s:%u\n", BACKEND_HOST, BACKEND_PORT);
+  } else {
+    Serial.println("[SETUP] WiFi connect timeout — will retry in loop()");
+  }
 }
 
 void loop() {
   if (WiFi.status() == WL_CONNECTED && system_state == WIFI_CONNECTING) {
     Serial.printf("[WIFI] Connected! IP: %s\n", WiFi.localIP().toString().c_str());
     system_state = WIFI_CONNECTED;
+
+    // Run discovery now that WiFi is available (late connect path)
+    if (BACKEND_HOST[0] == '\0') {
+      discover_backend(BACKEND_HOST, sizeof(BACKEND_HOST), &BACKEND_PORT);
+      Serial.printf("[LOOP] Backend: %s:%u\n", BACKEND_HOST, BACKEND_PORT);
+    }
+
     setup_websocket();
   }
 
