@@ -9,12 +9,14 @@
  *
  * GPIO ALLOCATION:
  *   I2S Audio : GPIO 4 (BCLK), 5 (LRC), 6 (DOUT), 7 (DIN)  — reserved, do NOT use for servos
- *   Servo PWM : GPIO 12–21  (safe from audio)
+ *   Servo PWM : GPIO 12–21  (currently used; additional safe pins: 35–42, 47, 48)
  *
  * WARNING: ESP32-S3 restricted GPIOs
  *   GPIO 0, 3, 45, 46 = Strapping pins (avoid)
  *   GPIO 26–32         = PSRAM / internal SPI flash (DO NOT USE)
  *   GPIO 6, 7          = Used here for I2S DOUT/DIN — safe on ESP32-S3 N16R8
+ *
+ * Safe GPIOs for servo PWM: 12–21, 35–42, 47, 48
  */
 
 #include <stdint.h>

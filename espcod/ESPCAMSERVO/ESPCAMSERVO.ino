@@ -16,7 +16,7 @@
  *
  * GPIO MAPPING:
  * - I2S Audio: GPIO 4(BCLK), 5(LRC), 6(DOUT), 7(DIN)
- * - Servos: GPIO 12-21 (safe from audio)
+ * - Servos: GPIO 12-21, 35-42, 47, 48
  */
 
 #include <WiFi.h>
