@@ -73,7 +73,23 @@ async def lifespan(app: FastAPI):
     await heartbeat_monitor.start()
     logger.info("Heartbeat monitor started")
 
+    # Start auto-discovery services so ESP32 devices can find this backend
+    # without requiring a hardcoded IP address.
+    from app.discovery import MDNSAdvertiser, UDPBroadcaster
+    mdns_advertiser = MDNSAdvertiser(port=settings.PORT)
+    udp_broadcaster = UDPBroadcaster(port=settings.PORT)
+
+    mdns_ok = mdns_advertiser.start()
+    if not mdns_ok:
+        logger.warning("mDNS advertising unavailable (install 'zeroconf' to enable)")
+
+    await udp_broadcaster.start()
+
     yield
+
+    # Teardown discovery services
+    await udp_broadcaster.stop()
+    mdns_advertiser.stop()
 
     await heartbeat_monitor.stop()
     logger.info("Heartbeat monitor stopped")

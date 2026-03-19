@@ -4,16 +4,26 @@
 #include <HTTPClient.h>
 #include "driver/i2s.h"
 #include "esp_heap_caps.h"
+#include "discovery.h"
 
-const char WIFI_SSID[] = "YOUR_SSID";
+const char WIFI_SSID[]     = "YOUR_SSID";
 const char WIFI_PASSWORD[] = "YOUR_PASSWORD";
 
-const char BACKEND_HOST[] = "10.83.60.246";
-const uint16_t BACKEND_PORT = 8000;
+// Backend address is resolved at runtime via 4-layer discovery.
+// These variables are written by discover_backend() in setup().
+String g_backend_host = "";
+uint16_t g_backend_port = 8000;
 
-const char DEVICE_ID[] = "camcontroller";
-const char DEVICE_TYPE[] = "esp32s3cam";
+// Device ID is derived from the MAC address to avoid conflicts when
+// multiple ESP32 units are used on the same network.
+String g_device_id = "espcam_unknown";
+
+const char DEVICE_TYPE[]      = "esp32s3cam";
 const char FIRMWARE_VERSION[] = "2.0.0";
+
+// Reset pin: hold LOW for RESET_HOLD_MS to clear EEPROM and reboot
+const int  RESET_PIN     = 0;     // GPIO0 / BOOT button on most dev boards
+const long RESET_HOLD_MS = 3000;
 
 const char WAKE_WORD[] = "HI CHETAN";
 
@@ -130,7 +140,8 @@ String url_encode(const char* input) {
 
 bool notify_text(const char* text) {
   HTTPClient http;
-  String url = String("http://") + BACKEND_HOST + ":" + String(BACKEND_PORT) + "/api/audio/notify?device_id=" + DEVICE_ID + "&text=" + url_encode(text);
+  String url = String("http://") + g_backend_host + ":" + String(g_backend_port) + "/api/audio/notify?device_id=" + g_device_id + "&text=" + url_encode(text);
+  http.setTimeout(5000);
   http.begin(url);
   int code = http.GET();
   http.end();
@@ -354,12 +365,13 @@ bool record_audio(uint8_t* buffer, size_t total_bytes) {
 bool upload_audio(uint8_t* pcm, size_t len, bool is_manual) {
   if (!pcm || len == 0) return false;
   HTTPClient http;
-  String url = String("http://") + BACKEND_HOST + ":" + String(BACKEND_PORT) + "/api/audio/upload?device_id=" + DEVICE_ID;
+  String url = String("http://") + g_backend_host + ":" + String(g_backend_port) + "/api/audio/upload?device_id=" + g_device_id;
   if (is_manual) {
     url += "&manual=true";
   }
   url += "&level=" + String(last_wake_level);
   url += "&threshold=" + String(wake_threshold);
+  http.setTimeout(30000);
   http.begin(url);
   http.addHeader("Content-Type", "application/octet-stream");
   int code = http.POST(pcm, len);
@@ -381,13 +393,15 @@ void setup_websocket() {
   if (millis() - last_ws_attempt < WS_RECONNECT_INTERVAL) {
     return;
   }
-  webSocket.begin(BACKEND_HOST, BACKEND_PORT, "/ws/camcontroller");
+  String ws_path = "/ws/" + g_device_id;
+  webSocket.begin(g_backend_host.c_str(), g_backend_port, ws_path.c_str());
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
   webSocket.enableHeartbeat(15000, 3000, 2);
   system_state = WS_CONNECTING;
   last_ws_attempt = millis();
-  Serial.println("[WS] Connecting to backend...");
+  Serial.printf("[WS] Connecting to %s:%u%s\n",
+                g_backend_host.c_str(), g_backend_port, ws_path.c_str());
 }
 
 void send_registration() {
@@ -395,7 +409,7 @@ void send_registration() {
   reg["message_type"] = "registration";
   reg["device_type"] = DEVICE_TYPE;
   JsonObject meta = reg.createNestedObject("metadata");
-  meta["device_id"] = DEVICE_ID;
+  meta["device_id"] = g_device_id;
   meta["firmware_version"] = FIRMWARE_VERSION;
   meta["capabilities"] = "audio";
   meta["sample_rate"] = AUDIO_SAMPLE_RATE;
@@ -489,20 +503,118 @@ void webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
 void setup() {
   Serial.begin(115200);
   delay(1000);
+
+  Serial.println("\n========================================");
+  Serial.println("  ChetanTheRobot ESPCAM v2.0");
+  Serial.println("  Auto-Discovery Edition");
+  Serial.println("========================================\n");
+
+  // Generate unique device ID from MAC address
+  uint8_t mac[6];
+  WiFi.macAddress(mac);
+  char mac_str[13];
+  snprintf(mac_str, sizeof(mac_str), "%02x%02x%02x%02x%02x%02x",
+           mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+  g_device_id = String("espcam_") + String(mac_str);
+  Serial.printf("[DEVICE] ID: %s\n", g_device_id.c_str());
+
+  // Configure reset button (active-LOW, use internal pull-up)
+  pinMode(RESET_PIN, INPUT_PULLUP);
+
   setup_audio();
   calibrate_wake_threshold();
+
+  // Connect to WiFi
   setup_wifi();
+  Serial.print("[WIFI] Waiting for connection");
+  unsigned long wifi_start = millis();
+  unsigned long reset_start = 0;
+  while (WiFi.status() != WL_CONNECTED && millis() - wifi_start < 30000) {
+    // Check reset button (non-blocking)
+    if (digitalRead(RESET_PIN) == LOW) {
+      if (reset_start == 0) reset_start = millis();
+      if (millis() - reset_start > (unsigned long)RESET_HOLD_MS) {
+        Serial.println("\n[RESET] Button held — clearing config and rebooting");
+        EEPROMConfig::clear();
+        ESP.restart();
+      }
+    } else {
+      reset_start = 0;
+    }
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println();
+
+  if (WiFi.status() != WL_CONNECTED) {
+    Serial.println("[WIFI] Connection timeout — rebooting");
+    delay(1000);
+    ESP.restart();
+  }
+  Serial.printf("[WIFI] Connected! IP: %s\n", WiFi.localIP().toString().c_str());
+  system_state = WIFI_CONNECTED;
+
+  // Run 4-layer backend discovery
+  if (!discover_backend(g_backend_host, g_backend_port)) {
+    Serial.println("[DISCOVERY] All layers failed — rebooting in 10s");
+    delay(10000);
+    ESP.restart();
+  }
+  Serial.printf("[DISCOVERY] Backend resolved: %s:%u\n",
+                g_backend_host.c_str(), g_backend_port);
+
+  setup_websocket();
 }
 
 void loop() {
-  if (WiFi.status() == WL_CONNECTED && system_state == WIFI_CONNECTING) {
-    Serial.printf("[WIFI] Connected! IP: %s\n", WiFi.localIP().toString().c_str());
+  // Check reset button — hold for RESET_HOLD_MS to factory-reset
+  static unsigned long reset_pressed_at = 0;
+  if (digitalRead(RESET_PIN) == LOW) {
+    if (reset_pressed_at == 0) reset_pressed_at = millis();
+    if (millis() - reset_pressed_at > (unsigned long)RESET_HOLD_MS) {
+      Serial.println("[RESET] Factory reset triggered");
+      EEPROMConfig::clear();
+      delay(500);
+      ESP.restart();
+    }
+  } else {
+    reset_pressed_at = 0;
+  }
+
+  // Reconnect WiFi if dropped
+  if (WiFi.status() != WL_CONNECTED) {
+    if (system_state != WIFI_CONNECTING) {
+      Serial.println("[WIFI] Connection lost — reconnecting...");
+      system_state = WIFI_CONNECTING;
+      WiFi.reconnect();
+    }
+    delay(500);
+    return;
+  }
+
+  if (system_state == WIFI_CONNECTING) {
+    Serial.printf("[WIFI] Reconnected! IP: %s\n", WiFi.localIP().toString().c_str());
     system_state = WIFI_CONNECTED;
+    // Try the cached EEPROM value first; only run full discovery if it fails
+    String cached_host;
+    uint16_t cached_port = 8000;
+    bool eeprom_ok = EEPROMConfig::load(cached_host, cached_port);
+    if (eeprom_ok) {
+      g_backend_host = cached_host;
+      g_backend_port = cached_port;
+      Serial.printf("[WIFI] Using cached backend %s:%u\n",
+                    g_backend_host.c_str(), g_backend_port);
+    } else {
+      if (!discover_backend(g_backend_host, g_backend_port)) {
+        Serial.println("[DISCOVERY] Re-discovery failed — will retry next loop");
+        return;
+      }
+    }
     setup_websocket();
   }
 
   webSocket.loop();
-  
+
   if (audio_playing) {
     if (millis() - audio_playing_start > AUDIO_PLAYING_TIMEOUT) {
       Serial.println("[AUDIO] Playback timeout! Resetting state.");
@@ -510,6 +622,7 @@ void loop() {
       i2s_zero_dma_buffer(I2S_PORT);
     } else {
       delay(5);
+      webSocket.loop();
       return;
     }
   }
@@ -546,30 +659,28 @@ void loop() {
     if (should_record) {
       last_wake_time = now;
       size_t total_bytes = (size_t)AUDIO_SAMPLE_RATE * RECORD_SECONDS * (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
-      
+
       Serial.printf("[AUDIO] Allocating %u bytes (Heap: %u, PSRAM: %u)\n", total_bytes, esp_get_free_heap_size(), heap_caps_get_free_size(MALLOC_CAP_SPIRAM));
       uint8_t* pcm = (uint8_t*)heap_caps_malloc(total_bytes, MALLOC_CAP_SPIRAM);
-      
+
       // Fallback: Adaptive sizing for internal RAM
       if (!pcm) {
          Serial.println("[AUDIO] PSRAM failed. Trying internal RAM with adaptive size...");
-         // Try 5 seconds (160KB) which fits in ~240KB heap
          size_t reduced_seconds = 5;
          total_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds * (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
          pcm = (uint8_t*)malloc(total_bytes);
-         
+
          if (!pcm) {
-             // Try 3 seconds (96KB) as last resort
              reduced_seconds = 3;
              total_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds * (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
              pcm = (uint8_t*)malloc(total_bytes);
          }
-         
+
          if (pcm) {
              Serial.printf("[AUDIO] Success: allocated %u seconds (%u bytes) in internal RAM\n", reduced_seconds, total_bytes);
          }
       }
-      
+
       if (pcm) {
         if (record_audio(pcm, total_bytes)) {
           prompt_waiting = true;
