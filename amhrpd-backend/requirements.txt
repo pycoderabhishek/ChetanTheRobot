@@ -10,4 +10,3 @@ scipy
 soundfile
 pyttsx3
 openai-whisper
-zeroconf==0.131.0

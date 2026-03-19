@@ -2,168 +2,196 @@ import json
 import os
 import difflib
 import re
+from difflib import SequenceMatcher
+from typing import Optional, Dict, List, Tuple
 
-# Path to the new data file (relative to this file)
-DATA_FILE = "npgc_information_pack.json"
+# Path to the Q&A database file
+# From app/audio/ → ../../dataset/ (go up 2 levels to amhrpd-backend/)
+QA_DATABASE_FILE = "../../dataset/query.json"
 
-# In-memory cache of the data
-_knowledge_data = None
+# In-memory cache of the Q&A data
+_qa_database = None
+_qa_index = None  # Quick lookup index
 
-def load_knowledge():
-    global _knowledge_data
-    if _knowledge_data:
-        return _knowledge_data
+class QAMatch:
+    """Data class for Q&A match results"""
+    def __init__(self, question: str, answer: str, category: str, confidence: float):
+        self.question = question
+        self.answer = answer
+        self.category = category
+        self.confidence = confidence  # 0.0 to 1.0
+    
+    def __repr__(self):
+        return f"QAMatch(q='{self.question[:30]}...', confidence={self.confidence:.2f})"
 
+def load_qa_database() -> Optional[List[Dict]]:
+    """Load Q&A database from query.json with caching"""
+    global _qa_database
+    
+    if _qa_database is not None:
+        return _qa_database
+    
     try:
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        data_path = os.path.join(current_dir, DATA_FILE)
+        # Navigate to dataset folder (../../dataset/)
+        data_path = os.path.join(current_dir, QA_DATABASE_FILE)
+        data_path = os.path.abspath(data_path)  # Resolve to absolute path
         
-        if os.path.exists(data_path):
-            with open(data_path, "r", encoding="utf-8") as f:
-                _knowledge_data = json.load(f)
-                return _knowledge_data
-        else:
-            print(f"Data file not found at: {data_path}")
+        if not os.path.exists(data_path):
+            print(f"Q&A database not found at: {data_path}")
+            return None
+        
+        with open(data_path, "r", encoding="utf-8") as f:
+            _qa_database = json.load(f)
+            print(f"✓ Loaded {len(_qa_database)} Q&A pairs from query.json")
+            return _qa_database
+            
+    except json.JSONDecodeError as e:
+        print(f"Error parsing Q&A database JSON: {e}")
         return None
     except Exception as e:
-        print(f"Error loading knowledge base: {e}")
+        print(f"Error loading Q&A database: {e}")
         return None
 
-def search_faculty(query, data):
-    """Search for faculty members by name or department."""
-    faculty_list = data.get("structured", {}).get("faculty_flat", [])
-    query = query.lower()
-    results = []
+def _normalize_text(text: str) -> str:
+    """Normalize text for comparison"""
+    text = text.lower().strip()
+    # Remove extra whitespace
+    text = re.sub(r'\s+', ' ', text)
+    return text
 
-    # 1. Search by Name
-    for f in faculty_list:
-        if f.get("name", "").lower() in query:
-            results.append(f)
+def _calculate_similarity(query: str, target: str) -> float:
+    """
+    Calculate similarity score between query and target text (0.0 to 1.0)
+    Uses SequenceMatcher for fuzzy matching
+    """
+    query = _normalize_text(query)
+    target = _normalize_text(target)
     
-    # 2. Search by Department (if no name match or specific department query)
-    # Check if query contains a department name directly if "who", "teach", "faculty", "dept" is in query
-    if not results and any(k in query for k in ["who", "teach", "faculty", "department", "dept"]):
-        unique_depts = set(f.get("department", "") for f in faculty_list)
-        for dept in unique_depts:
-            if dept.lower() in query:
-                # Found a department mentioned in query, get all faculty for it
-                for f in faculty_list:
-                    if f.get("department") == dept:
-                        results.append(f)
-                break # Stop after finding one matching department to avoid noise
-                
-    if results:
-        # Format response
-        responses = []
-        for res in results[:3]: # Limit to top 3
-            responses.append(f"{res['name']} ({res['designation']}, Dept of {res['department']})")
-        return "Found faculty: " + "; ".join(responses)
+    # Direct match gets highest score
+    if query in target or target in query:
+        return 1.0
     
-    return None
+    # Fuzzy matching
+    return SequenceMatcher(None, query, target).ratio()
 
-def search_courses(query, data):
-    """Search for course details."""
-    catalog = data.get("structured", {}).get("academics_catalog", {}).get("courses_full_catalog", {}).get("courses", {})
-    all_courses = []
-    for cat in catalog.values(): # undergraduate, postgraduate, etc.
-        all_courses.extend(cat)
-        
-    query = query.lower()
+def _tokenize_query(query: str) -> List[str]:
+    """Extract keywords from query"""
+    query = _normalize_text(query)
+    # Remove common stop words
+    stop_words = {'is', 'the', 'a', 'an', 'what', 'how', 'where', 'when', 'who', 'why', 'does', 'do', 'at', 'in', 'of'}
+    tokens = [w for w in query.split() if w not in stop_words]
+    return tokens
+
+def search_qa_database(query: str, top_k: int = 3, min_confidence: float = 0.5) -> List[QAMatch]:
+    """
+    Advanced Q&A search with fuzzy matching and multiple scoring strategies
     
-    # Normalize query for common abbreviations
-    query = query.replace("bca", "b.c.a.").replace("bba", "b.b.a.").replace("bcom", "b.com").replace("bsc", "b.sc")
-
-    target_course = None
-    # Fuzzy match course name
-    best_ratio = 0
-    for course in all_courses:
-        c_name = course.get("name", "").lower()
-        # Direct check
-        if c_name in query:
-            target_course = course
-            break
-        # Similarity check
-        ratio = difflib.SequenceMatcher(None, query, c_name).ratio()
-        if ratio > 0.6 and ratio > best_ratio: # Threshold
-            best_ratio = ratio
-            target_course = course
-            
-    if target_course:
-        info = f"{target_course['name']}: Duration {target_course['duration']}, Eligibility {target_course['entry_qualification']}."
-        if "medium" in target_course:
-            info += f" Medium: {', '.join(target_course['medium'])}."
-        return info
-
-    return None
-
-def search_admissions(query, data):
-    """Search admission related info."""
-    adm = data.get("structured", {}).get("admissions", {})
-    query = query.lower()
+    Args:
+        query: User's question
+        top_k: Return top K matches
+        min_confidence: Minimum confidence threshold (0.0 to 1.0)
     
-    if "date" in query or "schedule" in query:
-        sched = adm.get("admission_schedule", {})
-        last_dates = sched.get("online_application_last_dates", {})
-        return f"Application Last Dates: UG - {last_dates.get('ug_courses')}, PG - {last_dates.get('pg_courses')}."
-        
-    if "eligibility" in query or "criteria" in query:
-        # Try to find specific course eligibility if course name is in query
-        criteria_list = adm.get("eligibility_criteria", [])
-        for c in criteria_list:
-            if c.get("course", "").lower() in query:
-                return f"Eligibility for {c['course']}: {c['criteria']}"
-        return "Please specify the course to check eligibility."
-
-    return None
-
-def search_institution(query, data):
-    """General institution info."""
-    inst = data.get("structured", {}).get("institution", {})
-    query = query.lower()
+    Returns:
+        List of QAMatch objects sorted by confidence (highest first)
+    """
+    qa_data = load_qa_database()
+    if not qa_data:
+        return []
     
-    if "address" in query or "location" in query or "where" in query:
-        return f"Address: {inst.get('location', {}).get('address')}."
+    query_normalized = _normalize_text(query)
+    query_tokens = _tokenize_query(query)
+    
+    matches = []
+    
+    for item in qa_data:
+        question = item.get("query", "")
+        answer = item.get("answer", "")
+        category = item.get("category", "Unknown")
         
-    if "contact" in query or "phone" in query or "email" in query:
-        contact = inst.get("location", {}) # In one place it's under location, in academics_catalog under contact. Let's use institution root.
-        # Actually structure says institution -> location -> phone
-        return f"Phone: {contact.get('phone')}, Email: {contact.get('email')}."
+        # Strategy 1: Direct question similarity
+        question_similarity = _calculate_similarity(query_normalized, _normalize_text(question))
         
-    if "vision" in query:
-        return f"Vision: {data.get('structured', {}).get('vision_mission', {}).get('vision')}"
+        # Strategy 2: Token-based matching (how many keywords match)
+        question_tokens = _tokenize_query(question)
+        token_matches = len(set(query_tokens) & set(question_tokens))
+        token_score = token_matches / max(len(query_tokens), 1) if query_tokens else 0
         
-    if "mission" in query:
-        return f"Mission: {data.get('structured', {}).get('vision_mission', {}).get('mission')}"
+        # Strategy 3: Category-based boost
+        category_tokens = _tokenize_query(category)
+        category_match = len(set(query_tokens) & set(category_tokens)) > 0
+        
+        # Combined confidence score (weighted average)
+        confidence = (question_similarity * 0.6 + token_score * 0.3 + 
+                     (0.1 if category_match else 0.0))
+        
+        if confidence >= min_confidence:
+            matches.append(QAMatch(
+                question=question,
+                answer=answer,
+                category=category,
+                confidence=confidence
+            ))
+    
+    # Sort by confidence (highest first)
+    matches.sort(key=lambda x: x.confidence, reverse=True)
+    
+    return matches[:top_k]
 
-    return None
-
-def get_answer(query: str) -> str | None:
-    data = load_knowledge()
-    if not data:
+def get_answer(query: str) -> Optional[str]:
+    """
+    Main entry point: Get answer for a user query
+    
+    Returns:
+        Answer string if found, None otherwise
+    """
+    if not query or not query.strip():
         return None
-
-    query = query.lower()
-
-    # Dispatcher
-    if "faculty" in query or "professor" in query or "who is" in query or "teach" in query:
-        res = search_faculty(query, data)
-        if res: return res
-        
-    if "course" in query or "duration" in query or "degree" in query or "bca" in query or "b.sc" in query or "b.com" in query or "m.sc" in query:
-        res = search_courses(query, data)
-        if res: return res
-        
-    if "admission" in query or "apply" in query or "eligibility" in query or "date" in query:
-        res = search_admissions(query, data)
-        if res: return res
-        
-    if "college" in query or "address" in query or "contact" in query or "vision" in query or "mission" in query:
-        res = search_institution(query, data)
-        if res: return res
-
-    # Fallback: check faculty again if it looks like a name (simple heuristic)
-    # or just try all searches
-    res = search_faculty(query, data)
-    if res: return res
+    
+    # Search Q&A database
+    matches = search_qa_database(query, top_k=1, min_confidence=0.45)
+    
+    if matches:
+        best_match = matches[0]
+        # Return answer if confidence is reasonable
+        if best_match.confidence >= 0.45:
+            return best_match.answer
     
     return None
+
+def search_qa(query: str, top_k: int = 3) -> List[Dict]:
+    """
+    Public API for Q&A search (returns full match details)
+    Useful for debugging or showing multiple options
+    
+    Returns:
+        List of dictionaries with question, answer, category, confidence
+    """
+    matches = search_qa_database(query, top_k=top_k, min_confidence=0.40)
+    
+    return [
+        {
+            "question": m.question,
+            "answer": m.answer,
+            "category": m.category,
+            "confidence": round(m.confidence, 3)
+        }
+        for m in matches
+    ]
+
+def get_qa_stats() -> Dict:
+    """Get statistics about the Q&A database"""
+    qa_data = load_qa_database()
+    if not qa_data:
+        return {"status": "Database not loaded"}
+    
+    categories = {}
+    for item in qa_data:
+        cat = item.get("category", "Unknown")
+        categories[cat] = categories.get(cat, 0) + 1
+    
+    return {
+        "total_qa_pairs": len(qa_data),
+        "categories": categories,
+        "status": "✓ Ready"
+    }

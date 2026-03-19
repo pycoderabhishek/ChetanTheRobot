@@ -1,4 +1,3 @@
-import asyncio
 import base64
 import logging
 from datetime import datetime
@@ -32,39 +31,16 @@ DEVICE_TYPE_BY_COMMAND = {
 CHUNK_SIZE = 2048
 
 async def send_audio_response(device_id: str, pcm: bytes, samplerate: int = 16000) -> bool:
-    """Send PCM audio to a connected device over WebSocket.
-
-    For small payloads (≤ CHUNK_SIZE bytes) an ``audio_response`` message is
-    sent in a single frame so the ESPCAM can use its direct ``play_pcm()``
-    path.  For larger payloads the audio is split into ``audio_chunk``
-    messages with sequential ``index`` / ``total`` / ``is_last`` fields,
-    matching the ``play_pcm_chunk()`` path on the ESPCAM.
-    """
     if not pcm:
         return False
     cm = get_connection_manager()
-
-    # ── Small payload: single audio_response frame ─────────────────────────
-    if len(pcm) <= CHUNK_SIZE:
-        b64 = base64.b64encode(pcm).decode("ascii")
-        sent = await cm.send_to_device(device_id, {
-            "message_type": "audio_response",
-            "samplerate": samplerate,
-            "format": "pcm_s16_le",
-            "audio_base64": b64,
-        })
-        if not sent:
-            logger.error(f"Failed to send audio_response ({len(pcm)} B) to {device_id}")
-        return sent
-
-    # ── Large payload: chunked audio_chunk stream ───────────────────────────
+    
+    # Always use chunking for stability (Fix #5)
     total = (len(pcm) + CHUNK_SIZE - 1) // CHUNK_SIZE
-    logger.info(f"Sending {len(pcm)} B of audio to {device_id} in {total} chunk(s)")
     for idx in range(total):
         start = idx * CHUNK_SIZE
         end = min(len(pcm), start + CHUNK_SIZE)
         b64 = base64.b64encode(pcm[start:end]).decode("ascii")
-        is_last = idx == total - 1
         sent = await cm.send_to_device(device_id, {
             "message_type": "audio_chunk",
             "samplerate": samplerate,
@@ -72,15 +48,11 @@ async def send_audio_response(device_id: str, pcm: bytes, samplerate: int = 1600
             "audio_base64": b64,
             "index": idx,
             "total": total,
-            "is_last": is_last,
+            "is_last": idx == total - 1
         })
         if not sent:
-            logger.error(f"Failed to send audio chunk {idx + 1}/{total} to {device_id}")
+            logger.error(f"Failed to send audio chunk {idx+1}/{total} to {device_id}")
             return False
-        if not is_last:
-            # Yield to the event loop between chunks so the ESP32 has time to
-            # drain its WebSocket receive buffer before the next frame arrives.
-            await asyncio.sleep(0)
     return True
 
 @router.post("/upload")

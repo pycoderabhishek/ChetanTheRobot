@@ -19,4 +19,5 @@ def transcribe_pcm(pcm_bytes: bytes, samplerate: int = 16000, model_name: str = 
         audio = resample(audio, new_len)
     model = _get_model(model_name)
     result = model.transcribe(audio, fp16=False)
+    print(result.get("text", "").strip())
     return result.get("text", "")
