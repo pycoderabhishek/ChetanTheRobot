@@ -27,16 +27,15 @@
 #include "driver/i2s.h"
 #include "esp_heap_caps.h"
 #include "servo_config.h"
+#include "wifi_discovery.h"
 
 // ============================== WIFI / BACKEND ==============================
+// WiFi credentials, backend IP and device ID are managed by wifi_discovery.h.
+// Use the accessors below at runtime — do NOT hardcode IP addresses here.
+//   discovery_get_host()       — backend IP / hostname
+//   discovery_get_port()       — backend port (uint16_t)
+//   discovery_get_device_id()  — unique MAC-based device ID
 
-const char WIFI_SSID[]     = "YOUR_SSID";      // TODO: Replace with your WiFi SSID
-const char WIFI_PASSWORD[] = "YOUR_PASSWORD";  // TODO: Replace with your WiFi password
-
-const char     BACKEND_HOST[] = "10.83.60.246";
-const uint16_t BACKEND_PORT   = 8000;
-
-const char DEVICE_ID[]        = "espcontroller";
 const char DEVICE_TYPE[]      = "esp32s3cam_servo";
 const char FIRMWARE_VERSION[] = "1.0.0";
 
@@ -181,9 +180,10 @@ String url_encode(const char* input) {
 
 bool notify_text(const char* text) {
   HTTPClient http;
-  String url = String("http://") + BACKEND_HOST + ":" + String(BACKEND_PORT) +
-               "/api/audio/notify?device_id=" + DEVICE_ID +
+  String url = String("http://") + discovery_get_host() + ":" + String(discovery_get_port()) +
+               "/api/audio/notify?device_id=" + discovery_get_device_id() +
                "&text=" + url_encode(text);
+  http.setTimeout(5000);
   http.begin(url);
   int code = http.GET();
   http.end();
@@ -193,11 +193,12 @@ bool notify_text(const char* text) {
 bool upload_audio(uint8_t* pcm, size_t len, bool is_manual) {
   if (!pcm || len == 0) return false;
   HTTPClient http;
-  String url = String("http://") + BACKEND_HOST + ":" + String(BACKEND_PORT) +
-               "/api/audio/upload?device_id=" + DEVICE_ID;
+  String url = String("http://") + discovery_get_host() + ":" + String(discovery_get_port()) +
+               "/api/audio/upload?device_id=" + discovery_get_device_id();
   if (is_manual) url += "&manual=true";
   url += "&level="     + String(last_wake_level);
   url += "&threshold=" + String(wake_threshold);
+  http.setTimeout(10000);
   http.begin(url);
   http.addHeader("Content-Type", "application/octet-stream");
   int code = http.POST(pcm, len);
@@ -481,10 +482,13 @@ void pose_headup() {
 // ============================== WIFI ==============================
 
 void setup_wifi() {
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  system_state = WIFI_CONNECTING;
-  Serial.println("[WIFI] Connecting...");
+  // discovery_begin() blocks until WiFi is connected AND a backend is found.
+  // It tries (in order): stored EEPROM IP → mDNS → UDP broadcast → AP portal.
+  discovery_begin();
+  system_state = WIFI_CONNECTED;
+  Serial.printf("[WIFI] Discovery done. Backend: %s:%u  Device: %s\n",
+                discovery_get_host(), discovery_get_port(),
+                discovery_get_device_id());
 }
 
 // ============================== WEBSOCKET ==============================
@@ -493,13 +497,15 @@ void setup_websocket() {
   if (system_state == WS_CONNECTED || system_state == WS_CONNECTING) return;
   if (millis() - last_ws_attempt < WS_RECONNECT_INTERVAL) return;
 
-  webSocket.begin(BACKEND_HOST, BACKEND_PORT, "/ws/" + String(DEVICE_ID));
+  webSocket.begin(discovery_get_host(), discovery_get_port(),
+                  "/ws/" + String(discovery_get_device_id()));
   webSocket.onEvent(webSocketEvent);
   webSocket.setReconnectInterval(5000);
   webSocket.enableHeartbeat(15000, 3000, 2);
   system_state    = WS_CONNECTING;
   last_ws_attempt = millis();
-  Serial.println("[WS] Connecting to backend...");
+  Serial.printf("[WS] Connecting to %s:%u ...\n",
+                discovery_get_host(), discovery_get_port());
 }
 
 void send_registration() {
@@ -507,7 +513,7 @@ void send_registration() {
   reg["message_type"] = "registration";
   reg["device_type"]  = DEVICE_TYPE;
   JsonObject meta = reg.createNestedObject("metadata");
-  meta["device_id"]        = DEVICE_ID;
+  meta["device_id"]        = discovery_get_device_id();
   meta["firmware_version"] = FIRMWARE_VERSION;
   meta["capabilities"]     = "audio,servo";
   meta["sample_rate"]      = AUDIO_SAMPLE_RATE;
@@ -654,11 +660,27 @@ void setup() {
 // ============================== LOOP ==============================
 
 void loop() {
-  // WiFi state machine
+  // ── WiFi drop detection ───────────────────────────────────────────────────
+  // If WiFi drops after initial discovery we reconnect using the stored
+  // credentials — no full re-discovery needed because the backend IP is
+  // already known (in memory and in EEPROM).
+  if (WiFi.status() != WL_CONNECTED) {
+    if (system_state != WIFI_CONNECTING) {
+      Serial.println("[WIFI] Connection lost. Reconnecting...");
+      system_state = WIFI_CONNECTING;
+      WiFi.reconnect();
+    }
+    webSocket.loop();
+    delay(500);
+    return;
+  }
+
+  // ── WiFi reconnected after a drop ────────────────────────────────────────
   if (WiFi.status() == WL_CONNECTED && system_state == WIFI_CONNECTING) {
-    Serial.printf("[WIFI] Connected! IP: %s\n", WiFi.localIP().toString().c_str());
-    system_state = WIFI_CONNECTED;
-    setup_websocket();
+    Serial.printf("[WIFI] Reconnected! IP: %s\n",
+                  WiFi.localIP().toString().c_str());
+    system_state    = WIFI_CONNECTED;
+    last_ws_attempt = 0;   // trigger an immediate WebSocket reconnect
   }
 
   webSocket.loop();
