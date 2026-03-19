@@ -73,10 +73,28 @@ async def lifespan(app: FastAPI):
     await heartbeat_monitor.start()
     logger.info("Heartbeat monitor started")
 
+    # ---- Auto-discovery services (mDNS + UDP broadcast) ----
+    from app.discovery import MDNSAdvertiser, UDPBroadcaster
+
+    mdns_advertiser = MDNSAdvertiser(port=settings.PORT)
+    mdns_advertiser.start()
+    app.state.mdns_advertiser = mdns_advertiser
+
+    udp_broadcaster = UDPBroadcaster(port=settings.PORT)
+    await udp_broadcaster.start()
+    app.state.udp_broadcaster = udp_broadcaster
+    # --------------------------------------------------------
+
     yield
 
     await heartbeat_monitor.stop()
     logger.info("Heartbeat monitor stopped")
+
+    # Gracefully stop discovery services
+    if hasattr(app.state, "udp_broadcaster"):
+        await app.state.udp_broadcaster.stop()
+    if hasattr(app.state, "mdns_advertiser"):
+        app.state.mdns_advertiser.stop()
 
 # ================= APP =================
 
