@@ -10,6 +10,8 @@ import logging
 import os
 import json
 import time
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 
 from app.config import settings
 from app.websocket.manager import ConnectionManager
@@ -79,9 +81,17 @@ async def lifespan(app: FastAPI):
     mdns_advertiser = MDNSAdvertiser(port=settings.PORT)
     udp_broadcaster = UDPBroadcaster(port=settings.PORT)
 
-    mdns_ok = mdns_advertiser.start()
-    if not mdns_ok:
-        logger.warning("mDNS advertising unavailable (install 'zeroconf' to enable)")
+    # Run mDNS registration in thread pool to avoid blocking event loop (zeroconf timeout issue on Windows)
+    loop = asyncio.get_event_loop()
+    executor = ThreadPoolExecutor(max_workers=1)
+    try:
+        mdns_ok = await loop.run_in_executor(executor, mdns_advertiser.start)
+        if not mdns_ok:
+            logger.warning("mDNS advertising unavailable (install 'zeroconf' to enable)")
+    except Exception as exc:
+        logger.warning(f"mDNS startup failed: {exc}")
+    finally:
+        executor.shutdown(wait=False)
 
     await udp_broadcaster.start()
 

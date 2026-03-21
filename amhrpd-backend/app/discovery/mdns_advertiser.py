@@ -71,11 +71,18 @@ class MDNSAdvertiser:
             server=f"{MDNS_HOSTNAME}.local.",
         )
 
-        self._zeroconf = Zeroconf()
-        self._zeroconf.register_service(self._service_info)
-        self._running = True
-        logger.info("[mDNS] Service registered successfully")
-        return True
+        try:
+            self._zeroconf = Zeroconf()
+            self._zeroconf.register_service(self._service_info)
+            self._running = True
+            logger.info("[mDNS] Service registered successfully")
+            return True
+        except TimeoutError:
+            logger.warning("[mDNS] Registration timed out (Windows/network issue), continuing without mDNS")
+            return False
+        except Exception as exc:
+            logger.warning(f"[mDNS] Registration failed: {exc}, continuing without mDNS")
+            return False
 
     def stop(self) -> None:
         """Unregister mDNS service."""
