@@ -36,10 +36,9 @@ inline String resolve(uint16_t& out_port) {
     Serial.printf("[mDNS] Querying for %s.%s.local ...\n",
                   MDNS_SERVICE_TYPE, MDNS_SERVICE_PROTO);
 
-    // Query blocks for up to MDNS_QUERY_TIMEOUT_MS and returns the number
-    // of matching services found.
-    int n = MDNS.queryService(MDNS_SERVICE_TYPE, MDNS_SERVICE_PROTO,
-                              MDNS_QUERY_TIMEOUT_MS);
+    // Query returns the number of matching services found.
+    // Note: timeout is built-in to the library (typically 3000ms)
+    int n = MDNS.queryService(MDNS_SERVICE_TYPE, MDNS_SERVICE_PROTO);
 
     if (n <= 0) {
         Serial.println("[mDNS] No services found");
@@ -48,13 +47,16 @@ inline String resolve(uint16_t& out_port) {
 
     for (int i = 0; i < n; i++) {
         String hostname = MDNS.hostname(i);
+        IPAddress ipaddr = MDNS.address(i);
+        uint16_t port = MDNS.port(i);
+        
         Serial.printf("[mDNS] Candidate %d: hostname='%s' ip=%s port=%u\n",
                       i, hostname.c_str(),
-                      MDNS.IP(i).toString().c_str(), MDNS.port(i));
+                      ipaddr.toString().c_str(), port);
 
         if (hostname.indexOf(MDNS_BACKEND_HOSTNAME) >= 0) {
-            String ip = MDNS.IP(i).toString();
-            out_port  = MDNS.port(i);
+            String ip = ipaddr.toString();
+            out_port  = port;
             Serial.printf("[mDNS] Backend matched: %s:%u\n", ip.c_str(), out_port);
             return ip;
         }

@@ -32,8 +32,8 @@
 // ── AP / captive portal ───────────────────────────────────────────────────────
 // AP SSID will be suffixed with the last 2 bytes of the MAC address
 #define DISCOVERY_AP_SSID_PREFIX  "ChetanRobot_SETUP"
-// Set to "" for an open AP (no password required)
-#define DISCOVERY_AP_PASSWORD     ""
+// AP password for Windows 11 compatibility (minimum 8 characters)
+#define DISCOVERY_AP_PASSWORD     "ChetanRobot123"
 #define DISCOVERY_DNS_PORT        53
 #define DISCOVERY_HTTP_PORT       80
 
