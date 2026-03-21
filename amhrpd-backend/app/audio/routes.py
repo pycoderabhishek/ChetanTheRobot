@@ -6,7 +6,10 @@ from app.audio.stt import transcribe_pcm
 from app.audio.tts import tts_to_pcm
 from app.audio.prefix_gate import has_valid_prefix
 from app.audio.commandcheck import match_command
-from app.audio.knowledge_base import get_answer
+from app.audio.knowledge_base import get_answer  # kept for backward compatibility
+from app.audio.multilingual_knowledge_base import get_answer_multilingual
+from app.audio.multilingual_tts import tts_to_pcm_multilingual
+from app.audio.language_detector import detect_language
 from app.dependencies import get_connection_manager
 
 router = APIRouter(prefix="/api/audio", tags=["Audio"])
@@ -71,21 +74,23 @@ async def upload_audio(
         prefix_ok = True
     command_name, confidence = match_command(text)
     response_text = "I did not catch a valid command. Please repeat."
+    response_lang = "en"
     if not prefix_ok and not manual:
         response_text = "I did not hear the wake word. Please repeat your command."
     elif prefix_ok and command_name:
         response_text = f"Executing {command_name}. Anything else?"
     elif prefix_ok:
-        # Check Knowledge Base for answers
-        kb_answer = get_answer(text)
-        if kb_answer:
-            response_text = kb_answer
+        # Detect language and handle multilingual query
+        lang_info = detect_language(text)
+        ml_answer, response_lang = get_answer_multilingual(text)
+        if ml_answer:
+            response_text = ml_answer
         else:
             response_text = "I heard you. Please repeat your command."
     tts_error = None
     pcm = b""
     try:
-        pcm = tts_to_pcm(response_text, 16000)
+        pcm = tts_to_pcm_multilingual(response_text, language=response_lang, samplerate=16000)
     except Exception as exc:
         tts_error = str(exc)
         logger.exception("TTS failed for upload response")
