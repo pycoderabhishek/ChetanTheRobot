@@ -6,6 +6,8 @@ AMHR-PD is an audio-first robotic control system that connects ESP32 devices to 
 
 ## Key Features
 - Voice command pipeline: wake word → recording → STT → command matching → TTS
+- **Chatbot identity & personal-development Q&A** — Chetan answers "Who are you?", "What can you do?", "Who made you?" and 27 other self-awareness queries via `chatbot_profile.py`
+- **NPGC knowledge base** — 147 Q&A pairs across 24 categories with intelligent fuzzy matching and confidence scoring
 - WebSocket device registry and heartbeat monitoring
 - REST APIs for device status, command dispatch, and logs
 - SQLite persistence for devices, commands, and state snapshots
@@ -17,7 +19,12 @@ INMP441 Mic  -->  ESP32-S3 (Wake word + Record + Upload)
                          |  HTTP POST /api/audio/upload
                          v
                    FastAPI Backend
-        (STT -> Prefix Gate -> Command Match -> TTS)
+     (STT -> Prefix Gate -> Command Match -> TTS)
+                         |
+              ┌──────────┴──────────┐
+              │  chatbot_profile.py │  ← identity / capability questions
+              │  knowledge_base.py  │  ← NPGC Q&A (147 pairs, 24 categories)
+              └──────────┬──────────┘
                          |  WebSocket /ws/{device_id}
                          v
                Target Devices (esp32, esp32s3)
@@ -29,6 +36,12 @@ INMP441 Mic  -->  ESP32-S3 (Wake word + Record + Upload)
 ## Repository Structure
 ```
 amhrpd-backend/   FastAPI backend, audio pipeline, database, dashboard
+  app/audio/
+    chatbot_profile.py   Chatbot identity & personal-development Q&A
+    knowledge_base.py    NPGC Q&A engine (147 pairs, 24 categories)
+    routes.py            Audio upload pipeline
+  dataset/
+    query.json           Q&A database (147 entries)
 docs/             Documentation and data files
 espcod/           ESP32 firmware sketches
 ```
