@@ -733,5 +733,723 @@
     "category": "Chatbot & Personal Development",
     "query": "How do I talk to you?",
     "answer": "Just speak naturally after the wake word! Ask a question in plain English — for instance 'What is the admission procedure?' or give a command like 'Turn left'. I'll understand and respond. No need for special phrases or exact wording."
+    "category": "Faculty & Department Information",
+    "query": "How many departments does NPGC have?",
+    "answer": "NPGC has multiple departments including Commerce, Arts, Science, Computer Science, Economics, Hindi, English, History, Sociology, and more, catering to both under-graduate and post-graduate programs."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Who is the head of the Commerce department at NPGC?",
+    "answer": "For the current head of the Commerce department at NPGC, please visit the official website at www.npgc.in or contact the college office at 0522 4021304."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "How can I contact a faculty member at NPGC?",
+    "answer": "You can contact faculty members at NPGC through the college office at 0522 4021304, or by emailing support@npgc.in. Faculty contact details are also listed on the official website www.npgc.in."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Does NPGC have qualified and experienced faculty?",
+    "answer": "Yes, NPGC has a highly qualified and experienced faculty comprising PhD holders, researchers, and industry professionals. The college prides itself on maintaining a high faculty-to-student ratio for quality education."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "What are the office hours for faculty at NPGC?",
+    "answer": "Faculty office hours at NPGC are generally Monday to Saturday from 08:00 AM to 04:00 PM. Individual faculty members may have specific consultation hours which can be obtained from the department office."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Does NPGC have a Computer Science department?",
+    "answer": "Yes, NPGC has a Computer Science department offering BCA (Bachelor of Computer Applications) at the under-graduate level. The department is equipped with modern computer labs and experienced faculty."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "What is the student-to-faculty ratio at NPGC?",
+    "answer": "NPGC maintains a healthy student-to-faculty ratio to ensure quality education and personalized attention to students. For exact current figures, please contact the college administration."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Does NPGC have a Department of Economics?",
+    "answer": "Yes, NPGC has a Department of Economics offering both under-graduate (B.A. with Economics) and post-graduate (M.A. Economics) programs with experienced faculty members."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Are there guest lectures at NPGC?",
+    "answer": "Yes, NPGC regularly organizes guest lectures by industry experts, academic luminaries, and eminent personalities to provide students with exposure beyond regular curriculum."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Does NPGC have a Department of English?",
+    "answer": "Yes, NPGC has a Department of English offering B.A. and M.A. programs in English. The department focuses on literature, linguistics, and communication skills."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "How many full-time faculty members does NPGC have?",
+    "answer": "NPGC has a strong full-time faculty base. For the exact current count of faculty members, please visit the official website www.npgc.in or contact the college at 0522 4021304."
+  },
+  {
+    "category": "Faculty & Department Information",
+    "query": "Does NPGC have a Department of History?",
+    "answer": "Yes, NPGC has a Department of History offering both B.A. and M.A. programs in History, with focus on Indian and World History taught by experienced faculty members."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Does NPGC have an alumni association?",
+    "answer": "Yes, NPGC has an active alumni association that connects former students with the college and with each other. Alumni events and meets are organized periodically."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "How can I join the NPGC alumni network?",
+    "answer": "To join the NPGC alumni network, you can register on the official college website at www.npgc.in or contact the college administration at support@npgc.in."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Does NPGC organize alumni reunions?",
+    "answer": "Yes, NPGC organizes alumni meets and reunion events periodically. These events provide opportunities for former students to reconnect and contribute to the college's growth."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Can alumni of NPGC mentor current students?",
+    "answer": "Yes, NPGC encourages alumni to mentor current students. Alumni mentors provide career guidance, industry insights, and networking opportunities to help students plan their professional journey."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Are there notable alumni from NPGC?",
+    "answer": "Yes, NPGC has produced many notable alumni who have excelled in various fields including academics, business, government, and public service. Details of distinguished alumni are available on the college website."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "How does NPGC engage with its alumni?",
+    "answer": "NPGC engages with alumni through annual meets, alumni newsletter, social media platforms, invited lectures, and industry-academia collaboration programs."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Can alumni donate to NPGC?",
+    "answer": "Yes, NPGC welcomes contributions from alumni to support scholarships, infrastructure development, and academic initiatives. Alumni can contact the college administration for donation details."
+  },
+  {
+    "category": "Alumni Network",
+    "query": "Does NPGC alumni network help with job placements?",
+    "answer": "Yes, the NPGC alumni network actively supports current students with job referrals, internship opportunities, and career guidance. The alumni community is spread across various industries and organizations."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "What research facilities are available at NPGC?",
+    "answer": "NPGC has research facilities including a well-stocked library with N-LIST access, computer labs, science laboratories, and the Epoch Making Study Center to support research activities across disciplines."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Does NPGC have a research center?",
+    "answer": "Yes, NPGC has the Epoch Making Study Center which supports research activities. The college also encourages faculty and student research through various academic programs."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Has NPGC received any research grants?",
+    "answer": "NPGC faculty members have received research grants from UGC and other funding bodies. The college actively encourages and supports faculty research initiatives."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Does NPGC publish academic research papers?",
+    "answer": "Yes, NPGC faculty and students publish research papers in national and international journals. The college also has its own journal 'In-Sight' for academic publications."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Can under-graduate students participate in research at NPGC?",
+    "answer": "Yes, NPGC encourages under-graduate students to participate in research activities through project work, seminars, and research-oriented courses as part of the curriculum under NEP 2020."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Does NPGC collaborate with industries for research?",
+    "answer": "Yes, NPGC has industry-academia collaborations that support research, internship programs, and technology transfer. These partnerships benefit both students and faculty in research endeavors."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "What is the ATAL FDP program at NPGC?",
+    "answer": "ATAL-FDP (ATAL Faculty Development Programme) is organized by NPGC for faculty development in emerging areas of technology and innovation, conducted in collaboration with AICTE."
+  },
+  {
+    "category": "Research & Innovation",
+    "query": "Does NPGC support innovation and entrepreneurship?",
+    "answer": "Yes, NPGC promotes innovation and entrepreneurship among students through workshops, seminars, competitions, and career development programs. The college supports students in developing entrepreneurial skills."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Does NPGC have Wi-Fi on campus?",
+    "answer": "Yes, NPGC campus has Wi-Fi connectivity to support digital learning and internet access for students and faculty during college hours."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "How many computer labs does NPGC have?",
+    "answer": "NPGC has well-equipped computer laboratories for BCA and other computer-related courses. The labs have modern systems and relevant software to support practical learning."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Does NPGC have smart classrooms?",
+    "answer": "NPGC is progressively upgrading its classrooms with smart technology including projectors and audio-visual equipment to enhance the teaching-learning experience."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "What is the campus size of NPGC?",
+    "answer": "NPGC is situated on a sprawling campus near the banks of river Gomti in Lucknow. The campus includes academic blocks, library, hostels, sports facilities, canteen, and administrative offices."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Does NPGC have a science laboratory?",
+    "answer": "Yes, NPGC has science laboratories for B.Sc. students including Physics, Chemistry, and Botany labs equipped with necessary instruments and equipment for practical learning."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Does NPGC have an auditorium?",
+    "answer": "Yes, NPGC has an auditorium for organizing seminars, cultural events, convocations, and other large gatherings of students and faculty."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Does NPGC have a parking facility?",
+    "answer": "Yes, NPGC has parking facilities on campus for students and faculty. For details on parking rules and allocation, contact the college administration."
+  },
+  {
+    "category": "Technology & Infrastructure",
+    "query": "Is there a photocopying or printing facility at NPGC?",
+    "answer": "Yes, NPGC provides photocopying and printing facilities within the campus for students' academic needs. The library also supports students with printing facilities."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "What cultural events does NPGC organize?",
+    "answer": "NPGC organizes various cultural events including MERAKI (the annual cultural fest), Independence Day celebrations, Republic Day, Fresher's Party, Farewell ceremonies, and various inter-college competitions."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "When is the annual day of NPGC celebrated?",
+    "answer": "NPGC celebrates its annual day with various academic and cultural activities. For the exact date of the current academic year's annual day, please check the college website or notice boards."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "Does NPGC organize inter-college competitions?",
+    "answer": "Yes, NPGC organizes and participates in various inter-college competitions including sports tournaments, debate competitions, cultural events, and academic competitions."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "What is the Freshers Welcome party at NPGC?",
+    "answer": "The Freshers Welcome party at NPGC is an orientation event organized for new students to help them get acquainted with their seniors, faculty, and the college environment. It typically includes cultural performances and introductions."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "Does NPGC celebrate national festivals?",
+    "answer": "Yes, NPGC celebrates national festivals like Independence Day (August 15), Republic Day (January 26), and other national events with flag hoisting, cultural programs, and patriotic activities."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "Does NPGC have a drama or theatre club?",
+    "answer": "NPGC encourages students to participate in dramatic arts and theatre as part of cultural activities. The college organizes theatre performances and encourages student participation in cultural events."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "Does NPGC organize seminars and workshops?",
+    "answer": "Yes, NPGC regularly organizes seminars, workshops, conferences, and FDPs (Faculty Development Programs) on various academic, technical, and professional topics for students and faculty."
+  },
+  {
+    "category": "Cultural & Festival Events",
+    "query": "What is the farewell ceremony at NPGC?",
+    "answer": "The farewell ceremony at NPGC is organized by junior students to bid goodbye to outgoing final-year students. It includes cultural programs, distribution of mementos, and sharing of memories."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "How can a student file a grievance at NPGC?",
+    "answer": "Students at NPGC can file grievances through the Student Grievance Redressal Committee. Grievances can be submitted in writing to the Principal's office or through the official email support@npgc.in."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "What is the Student Grievance Redressal Committee at NPGC?",
+    "answer": "The Student Grievance Redressal Committee at NPGC is a body constituted to address and resolve student complaints and grievances related to academic, administrative, or personal issues within the college."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "How long does it take to resolve a grievance at NPGC?",
+    "answer": "NPGC aims to resolve student grievances in a timely manner. The Grievance Redressal Committee typically addresses and resolves complaints within 30 days of receipt."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "Does NPGC have an anti-ragging committee?",
+    "answer": "Yes, NPGC has a strict anti-ragging policy and an Anti-Ragging Committee to ensure a safe and respectful environment for all students. Ragging is strictly prohibited and punishable."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "How can I report ragging at NPGC?",
+    "answer": "Ragging incidents at NPGC can be reported to the Anti-Ragging Committee, Principal's office, or through the national anti-ragging helpline 1800-180-5522. Complaints can also be filed at antiragging.in."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "Does NPGC have a Women's Cell?",
+    "answer": "Yes, NPGC has an Internal Complaints Committee (ICC) or Women's Cell to address issues related to gender discrimination or harassment and to ensure a safe environment for female students and staff."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "Can students appeal against examination results at NPGC?",
+    "answer": "Yes, students can apply for re-evaluation or re-checking of answer sheets at NPGC. The process and fees for examination-related appeals are available from the examination section."
+  },
+  {
+    "category": "Grievance & Complaints Procedure",
+    "query": "How can I contact the RTI officer at NPGC?",
+    "answer": "NPGC has a designated Public Information Officer (PIO) for Right to Information (RTI) requests. RTI applications can be submitted to the college office. For details, visit www.npgc.in."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "What are the fees for BCA at NPGC?",
+    "answer": "For current fee structure of BCA at NPGC, please visit the official website www.npgc.in or contact the college administration at 0522 4021304. Fee structures are updated annually."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "What are the fees for B.Com at NPGC?",
+    "answer": "For the current fee structure of B.Com at NPGC, please visit the official website www.npgc.in or contact the college at 0522 4021304. Fees are reviewed and updated each academic year."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "Can students pay fees in installments at NPGC?",
+    "answer": "NPGC provides facility to pay fees in installments in certain cases. Students facing financial difficulties can contact the college administration or Principal's office for guidance on fee payment options."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "What is the last date for fee payment at NPGC?",
+    "answer": "The last date for fee payment at NPGC is notified each semester. Students should check the college website www.npgc.in and notice boards for fee payment deadlines to avoid late fees."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "Is there a fee waiver for SC/ST students at NPGC?",
+    "answer": "Yes, students from SC/ST and other backward communities may be eligible for fee waivers and scholarships as per government norms. Students should contact the scholarship cell at NPGC for details."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "How can I pay fees online at NPGC?",
+    "answer": "NPGC facilitates online fee payment through its official portal. Students can visit www.npgc.in for the fee payment link. Payment can be made via net banking, debit/credit cards, or UPI."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "What are the hostel fees at NPGC?",
+    "answer": "Hostel fees at NPGC vary based on room type and facilities. For current hostel fee structure, contact the hostel administration or visit the official website www.npgc.in."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "Are there any refund policies for fees at NPGC?",
+    "answer": "NPGC follows the UGC guidelines for fee refund policies. Students who withdraw from the course may be eligible for partial fee refunds based on the time of withdrawal. Contact the admission office for details."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "What is the examination fee at NPGC?",
+    "answer": "Examination fees at NPGC are charged separately each semester. The fee amount and payment deadline are announced before each examination. Check the college website or exam section for current fees."
+  },
+  {
+    "category": "Fee Structure & Payment Options",
+    "query": "Does NPGC charge development fees?",
+    "answer": "NPGC may charge development fees along with tuition fees as part of the annual fee structure. For a complete breakdown of all fees, visit the official website or contact the college administration."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC provide career counseling?",
+    "answer": "Yes, NPGC provides career counseling services to help students identify their strengths, explore career options, and plan their professional journey. The Training and Placement Office coordinates career guidance activities."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC organize campus recruitments?",
+    "answer": "Yes, NPGC organizes campus placement drives in collaboration with various companies. Students can register with the Training and Placement Office at 93355 19893 or placement@npgc.in."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC help students prepare resumes?",
+    "answer": "Yes, NPGC's Training and Placement Office assists students with resume writing, interview preparation, and professional development skills through workshops and coaching sessions."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "What workshops does NPGC organize for skill development?",
+    "answer": "NPGC organizes various skill development workshops including communication skills, digital literacy, soft skills, entrepreneurship, and industry-specific technical skills for student career development."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC organize job fairs?",
+    "answer": "Yes, NPGC periodically organizes job fairs and placement drives where multiple companies recruit students. These events provide direct interaction between students and potential employers."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "How can I register for placement activities at NPGC?",
+    "answer": "To register for placement activities at NPGC, contact the Training and Placement Office at 93355 19893 or email placement@npgc.in. Students can also check the college website for placement announcements."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC provide industry visits?",
+    "answer": "Yes, NPGC organizes industrial visits and educational tours to give students practical exposure to real-world work environments and industry practices."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC conduct mock interviews?",
+    "answer": "Yes, NPGC's Training and Placement Office conducts mock interviews and Group Discussion (GD) practice sessions to prepare students for campus recruitment and job interviews."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "What competitive exam guidance does NPGC provide?",
+    "answer": "NPGC supports students preparing for competitive examinations through coaching guidance, reference materials, and counseling. The college also provides information about government job opportunities relevant to the courses offered."
+  },
+  {
+    "category": "Career Development & Workshops",
+    "query": "Does NPGC have an entrepreneurship development cell?",
+    "answer": "NPGC promotes entrepreneurship among students through workshops, seminars, and mentoring programs. Students are encouraged to develop entrepreneurial ideas and business plans as part of career development initiatives."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Does NPGC recognize student achievements?",
+    "answer": "Yes, NPGC recognizes and celebrates student achievements in academics, sports, cultural activities, and extracurricular events through awards, merit certificates, and recognition at college functions."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "What merit-based awards does NPGC offer?",
+    "answer": "NPGC offers merit-based scholarships and awards for academic excellence. The college also recognizes students who top their respective courses through certificates and cash awards."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Does NPGC have a merit list for toppers?",
+    "answer": "Yes, NPGC publishes merit lists for academic toppers each semester/year. Students who excel in examinations are recognized and honored during college functions."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Has NPGC received any awards as an institution?",
+    "answer": "Yes, NPGC has received recognition as a NAAC Grade 'A' institution and holds CPE (College with Potential for Excellence) status from UGC. It is the only college in Lucknow with both Autonomous Status and CPE recognition."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Does NPGC felicitate sports achievers?",
+    "answer": "Yes, NPGC felicitates students who excel in sports at district, state, and national levels. Sports achievers are recognized during the annual sports day and college functions."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Are there cash prizes for academic achievers at NPGC?",
+    "answer": "NPGC recognizes academic achievers through scholarships and merit awards. The Nirdhan Chhattra Nidhi fund also supports financially challenged but academically excellent students."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Does NPGC recognize student contributions to social service?",
+    "answer": "Yes, NPGC recognizes students who contribute to social service through NSS, NCC, and community outreach programs. Outstanding NSS and NCC cadets are felicitated at college events."
+  },
+  {
+    "category": "Student Achievements & Awards",
+    "query": "Does NPGC publish student achievement news?",
+    "answer": "Yes, NPGC publishes student and college achievements in its magazines 'Abhivyakti' and 'Commercepedia', and also shares updates on the official website www.npgc.in and social media channels."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Does NPGC have mental health support for students?",
+    "answer": "Yes, NPGC has a counselling centre that provides mental health support and guidance to students. Trained counsellors are available to help students deal with academic stress, personal issues, and anxiety."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "How can I access counselling at NPGC?",
+    "answer": "Students can access counselling services at NPGC by visiting the counselling centre on campus. You can also contact the college administration at 0522 4021304 for scheduling a counselling session."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Does NPGC conduct stress management workshops?",
+    "answer": "Yes, NPGC organizes workshops on stress management, time management, and mental wellness to help students cope with academic pressure and maintain a healthy work-life balance."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Does NPGC have yoga or meditation sessions for students?",
+    "answer": "NPGC promotes physical and mental wellness through various activities. The college encourages yoga, meditation, and physical fitness among students as part of holistic development programs."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Is there a gym or fitness centre at NPGC?",
+    "answer": "NPGC has a gym facility in the hostel premises for resident students. The college also has sports facilities that support physical fitness and wellness for all students."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Does NPGC have peer support programs for student mental health?",
+    "answer": "NPGC encourages peer support and mentoring programs where senior students help juniors adjust to college life. The counselling centre also facilitates group sessions and peer support activities."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "What should I do if I feel overwhelmed at NPGC?",
+    "answer": "If you feel overwhelmed at NPGC, you can visit the counselling centre, talk to a faculty mentor, or contact the college administration. Students are encouraged to seek help and not face challenges alone."
+  },
+  {
+    "category": "Mental Health & Wellness",
+    "query": "Does NPGC address substance abuse issues among students?",
+    "answer": "NPGC has a strict no-substance policy on campus. The college provides awareness programs and counselling support to address substance abuse issues and maintain a healthy campus environment."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "What support does NPGC provide for differently-abled students?",
+    "answer": "NPGC provides support for differently-abled students including ramps and accessible facilities. The college is committed to inclusive education and provides necessary accommodations for students with disabilities."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "Does NPGC have ramps for wheelchair users?",
+    "answer": "Yes, NPGC has infrastructure provisions including ramps to ensure campus accessibility for differently-abled students and visitors using wheelchairs or other mobility aids."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "Are there special exam provisions for disabled students at NPGC?",
+    "answer": "Yes, NPGC provides special examination provisions for differently-abled students as per UGC and University of Lucknow guidelines, including extra time, scribes, and accessible exam venues."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "Can visually impaired students study at NPGC?",
+    "answer": "Yes, NPGC welcomes visually impaired students and provides necessary academic support and accommodations. The college follows UGC guidelines for inclusive education for students with visual impairment."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "Does NPGC have reserved seats for differently-abled students?",
+    "answer": "Yes, NPGC follows government norms for reserved seats for differently-abled (PwD) students. Reservations are available as per the Persons with Disabilities Act for eligible students."
+  },
+  {
+    "category": "Disability Support & Accessibility",
+    "query": "Who should differently-abled students contact at NPGC for support?",
+    "answer": "Differently-abled students at NPGC can contact the Principal's office or the student welfare section for support and accommodations. The college administration is committed to providing necessary assistance."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "What labs are available at NPGC?",
+    "answer": "NPGC has multiple laboratories including Computer Labs for BCA students, Physics Lab, Chemistry Lab, Botany Lab for B.Sc. students, and Commerce/Management labs for practical learning."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "What are the lab timings at NPGC?",
+    "answer": "Lab timings at NPGC are scheduled as per the timetable for each course. Practical sessions are generally conducted during regular college hours (08:00 AM to 04:00 PM), Monday to Saturday."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "Is there a lab manual provided to students at NPGC?",
+    "answer": "Yes, NPGC provides lab manuals and practical guides to students for their respective courses. These are available from the department and help students prepare for practical sessions."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "How are practical exams conducted at NPGC?",
+    "answer": "Practical exams at NPGC are conducted by the respective departments under the supervision of internal and external examiners. The exams include hands-on experiments, viva voce, and lab record evaluation."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "What safety measures are in place in NPGC labs?",
+    "answer": "NPGC labs follow standard safety protocols including fire extinguishers, first aid kits, protective equipment, and safety guidelines. Students are briefed on lab safety rules before practical sessions."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "Does NPGC have a language lab?",
+    "answer": "NPGC supports language learning and has a Language Exchange Program. The college facilitates language learning facilities to enhance students' communication skills in English and other languages."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "What software is available in NPGC computer labs?",
+    "answer": "NPGC computer labs are equipped with relevant software for BCA and other courses including programming tools, office applications, and specialized academic software. Students have access during scheduled lab hours."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "Can students use labs after regular hours at NPGC?",
+    "answer": "Access to labs after regular hours at NPGC requires prior permission from the department head. Special arrangements can be made for students during examination periods or project work."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "What is the student-to-computer ratio in NPGC computer labs?",
+    "answer": "NPGC maintains adequate computer-to-student ratios in its computer labs. For current infrastructure details, contact the Computer Science department or visit www.npgc.in."
+  },
+  {
+    "category": "Lab & Practical Training",
+    "query": "Does NPGC have a botany garden or herbarium?",
+    "answer": "NPGC's Botany department supports practical learning through botanical specimens, a herbarium, and laboratory facilities for B.Sc. Botany students to study plant science effectively."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Is project work mandatory at NPGC?",
+    "answer": "Yes, project work is a mandatory component for many courses at NPGC, especially under the NEP 2020 framework. Projects help students apply theoretical knowledge to real-world problems."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Does NPGC provide internship opportunities?",
+    "answer": "Yes, NPGC's Training and Placement Office facilitates internship opportunities for students through industry connections and placement drives. Students are encouraged to do internships during semester breaks."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "How do I apply for an internship through NPGC?",
+    "answer": "To apply for internships through NPGC, contact the Training and Placement Office at 93355 19893 or placement@npgc.in. The office maintains a list of industry partners offering internship opportunities."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Does NPGC provide stipend for internships?",
+    "answer": "Internship stipends depend on the company offering the internship. NPGC facilitates connections with industry partners, but stipend details vary by organization. Contact the placement office for more information."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "What duration is required for internships at NPGC?",
+    "answer": "Internship duration requirements at NPGC depend on the course and curriculum guidelines. Under NEP 2020, internships are an important component of holistic education. Check with your department for specific requirements."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Does NPGC have industry partnerships for student projects?",
+    "answer": "Yes, NPGC has industry partnerships that support student project work and internships. These collaborations provide students with real-world experience and industry exposure."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "How is project work evaluated at NPGC?",
+    "answer": "Project work at NPGC is evaluated by internal faculty guides and external examiners. Students present their projects through reports, presentations, and demonstrations as per course requirements."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Can students do projects with NPGC faculty as guides?",
+    "answer": "Yes, students at NPGC can work on research or academic projects under the guidance of faculty members. Faculty guides provide mentorship, direction, and evaluation support for student projects."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Does NPGC provide certificates for internship completion?",
+    "answer": "Internship certificates are typically provided by the host organization. NPGC's Training and Placement Office can provide supporting letters to students for official internship arrangements."
+  },
+  {
+    "category": "Project Work & Internships",
+    "query": "Are B.Voc students required to do industrial training at NPGC?",
+    "answer": "Yes, B.Voc (Bachelor of Vocation) programs at NPGC incorporate industrial training and on-the-job learning as a core component of the curriculum, providing vocational competencies alongside academic knowledge."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "Does NPGC have a mentorship program for students?",
+    "answer": "Yes, NPGC has a faculty mentorship program where faculty members are assigned as mentors to guide students academically, personally, and professionally throughout their college journey."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "How does the faculty mentorship program work at NPGC?",
+    "answer": "In NPGC's faculty mentorship program, each student is assigned a faculty mentor who regularly meets with them to track academic progress, address concerns, and provide career guidance."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "Does NPGC have peer mentoring?",
+    "answer": "Yes, NPGC encourages peer mentoring where senior students guide juniors in academic matters, college adaptation, and career planning. This creates a supportive learning community within the college."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "Can NPGC alumni mentor current students?",
+    "answer": "Yes, NPGC alumni are invited to mentor current students through alumni-student interaction programs. Alumni mentors share their professional experiences and career insights to help students make informed decisions."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "What topics are covered in NPGC mentorship sessions?",
+    "answer": "NPGC mentorship sessions cover academic planning, career counseling, personal development, stress management, industry awareness, competitive exam preparation, and professional skill building."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "How often do mentorship meetings happen at NPGC?",
+    "answer": "Mentorship meetings at NPGC are scheduled periodically, typically at least once a month or as needed. The frequency may vary based on student needs and faculty availability."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "How can a student request a mentor at NPGC?",
+    "answer": "Students at NPGC are typically assigned mentors at the beginning of the academic year. If a student needs a mentor or wishes to change their assigned mentor, they can contact the department head or student welfare office."
+  },
+  {
+    "category": "Mentorship Programs",
+    "query": "Does NPGC have industry mentors for career guidance?",
+    "answer": "NPGC facilitates industry mentors through its alumni network and industry partnerships. Industry professionals occasionally visit the campus to mentor students and share real-world career insights."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are offered in B.A. at NPGC?",
+    "answer": "B.A. at NPGC offers subjects including History, Geography, Economics, Political Science, Hindi, English, Sociology, Psychology, Home Science, Sanskrit, and more. Subject combinations may vary as per course requirements."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are offered in B.Sc. at NPGC?",
+    "answer": "B.Sc. at NPGC offers combinations in Physics, Chemistry, Maths, Botany, Zoology, and Computer Science. Students choose subject combinations at the time of admission."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are included in BCA curriculum at NPGC?",
+    "answer": "BCA curriculum at NPGC includes subjects like Programming in C/C++/Java, Data Structures, Database Management, Web Development, Computer Networks, Software Engineering, and Mathematics."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are offered in B.Com at NPGC?",
+    "answer": "B.Com at NPGC includes subjects such as Financial Accounting, Business Law, Income Tax, Auditing, Business Economics, Cost Accounting, Financial Management, and Computer Applications."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What are the subjects in M.A. at NPGC?",
+    "answer": "M.A. at NPGC is offered in subjects like Economics, Hindi, History, English, Sociology, and Political Science. Students choose their specialization at the time of M.A. admission."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are included in BBA at NPGC?",
+    "answer": "BBA curriculum at NPGC includes subjects like Business Management, Marketing Management, Financial Accounting, Human Resource Management, Entrepreneurship, Business Communication, and Economics."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What subjects are in M.Sc. at NPGC?",
+    "answer": "M.Sc. at NPGC is offered in subjects including Chemistry. Students interested in M.Sc. programs can contact the Science department or check www.npgc.in for current program offerings."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "What is the curriculum structure under NEP 2020 at NPGC?",
+    "answer": "Under NEP 2020, NPGC follows a flexible multi-disciplinary curriculum structure including Major, Minor, and Vocational subjects along with skill enhancement courses, value-added courses, and research components."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "Does NPGC offer vocational subjects?",
+    "answer": "Yes, NPGC offers vocational subjects and B.Voc programs under the NSDC framework. These programs include specialized vocational training in various trades and industries."
+  },
+  {
+    "category": "Departments & Subjects Offered",
+    "query": "Does NPGC offer physical education as a subject?",
+    "answer": "NPGC has sports facilities and promotes physical education through NCC, NSS, and sports programs. For physical education as an academic subject, contact the college administration for current curriculum details."
+  },
+  {
+    "category": "General Information",
+    "query": "What is the student strength at NPGC?",
+    "answer": "NPGC is one of the largest colleges in Lucknow with thousands of students enrolled across various under-graduate and post-graduate programs in Arts, Commerce, Science, and Computer faculties."
+  },
+  {
+    "category": "General Information",
+    "query": "Is NPGC a co-educational institution?",
+    "answer": "Yes, NPGC is a co-educational institution welcoming both male and female students across all programs. The college provides a safe and inclusive learning environment for all students."
+  },
+  {
+    "category": "General Information",
+    "query": "What is the medium of instruction at NPGC?",
+    "answer": "The medium of instruction at NPGC is primarily Hindi and English. Some programs may have specific language requirements. Contact the department for details on the medium of instruction for your course."
+  },
+  {
+    "category": "Admission",
+    "query": "What documents are required for admission at NPGC?",
+    "answer": "Documents required for admission at NPGC include: 10th and 12th mark sheets, transfer certificate, migration certificate, caste certificate (if applicable), character certificate, passport-size photographs, and Aadhar card."
+  },
+  {
+    "category": "Admission",
+    "query": "What is the minimum percentage required for BCA admission at NPGC?",
+    "answer": "For BCA admission at NPGC, students generally need to have passed 12th standard with Mathematics or Computer Science. The exact eligibility percentage is available on the college website www.npgc.in."
+  },
+  {
+    "category": "Admission",
+    "query": "Is there age limit for admission at NPGC?",
+    "answer": "For admission age limits at NPGC, students should check the current year's admission guidelines on the official website www.npgc.in as age requirements may vary by course and university norms."
+  },
+  {
+    "category": "Examination",
+    "query": "What is the examination pattern at NPGC?",
+    "answer": "NPGC follows a semester-based examination pattern under its Autonomous status. Examinations include internal assessments (assignments, class tests) and semester-end written examinations."
+  },
+  {
+    "category": "Examination",
+    "query": "How are internal assessments done at NPGC?",
+    "answer": "Internal assessments at NPGC include class tests, assignments, presentations, attendance, and practical work. Internal marks typically constitute 20-30% of the total marks depending on the course."
+  },
+  {
+    "category": "Library",
+    "query": "Does NPGC library have e-books and digital resources?",
+    "answer": "Yes, NPGC library provides access to N-LIST (National Library and Information Services Infrastructure for Scholarly Content) which includes thousands of e-books and e-journals for students and faculty."
+  },
+  {
+    "category": "Library",
+    "query": "Can I access NPGC library resources from home?",
+    "answer": "Yes, NPGC students and faculty can access N-LIST digital library resources remotely using their registered credentials. The N-LIST database provides access to e-books and e-journals from home."
+  },
+  {
+    "category": "Student Support",
+    "query": "Does NPGC have a Student Union?",
+    "answer": "NPGC has student representative bodies that work with the college administration to address student concerns and organize student welfare activities. Student elections are held as per university guidelines."
+  },
+  {
+    "category": "Student Support",
+    "query": "Does NPGC have an employment exchange registration facility?",
+    "answer": "NPGC supports students in registering with the employment exchange for government job opportunities. Students can seek guidance from the Training and Placement Office for employment registration."
   }
 ]
