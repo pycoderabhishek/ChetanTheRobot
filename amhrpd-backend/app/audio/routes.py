@@ -72,11 +72,17 @@ async def upload_audio(
         prefix_ok = True
     command_name, confidence = match_command(text)
     response_text = "I did not catch a valid command. Please repeat."
+    response_lang = "en"
     if not prefix_ok and not manual:
         response_text = "I did not hear the wake word. Please repeat your command."
     elif prefix_ok and command_name:
         response_text = f"Executing {command_name}. Anything else?"
     elif prefix_ok:
+        # Detect language and handle multilingual query
+        lang_info = detect_language(text)
+        ml_answer, response_lang = get_answer_multilingual(text)
+        if ml_answer:
+            response_text = ml_answer
         # Check chatbot profile questions first (identity, capabilities, creator, etc.)
         profile_answer = get_chatbot_profile(text)
         if profile_answer:
@@ -89,7 +95,7 @@ async def upload_audio(
     tts_error = None
     pcm = b""
     try:
-        pcm = tts_to_pcm(response_text, 16000)
+        pcm = tts_to_pcm_multilingual(response_text, language=response_lang, samplerate=16000)
     except Exception as exc:
         tts_error = str(exc)
         logger.exception("TTS failed for upload response")
