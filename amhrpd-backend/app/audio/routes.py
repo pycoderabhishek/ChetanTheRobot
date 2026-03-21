@@ -6,10 +6,8 @@ from app.audio.stt import transcribe_pcm
 from app.audio.tts import tts_to_pcm
 from app.audio.prefix_gate import has_valid_prefix
 from app.audio.commandcheck import match_command
-from app.audio.knowledge_base import get_answer  # kept for backward compatibility
-from app.audio.multilingual_knowledge_base import get_answer_multilingual
-from app.audio.multilingual_tts import tts_to_pcm_multilingual
-from app.audio.language_detector import detect_language
+from app.audio.knowledge_base import get_answer
+from app.audio.chatbot_profile import get_chatbot_profile
 from app.dependencies import get_connection_manager
 
 router = APIRouter(prefix="/api/audio", tags=["Audio"])
@@ -85,6 +83,13 @@ async def upload_audio(
         ml_answer, response_lang = get_answer_multilingual(text)
         if ml_answer:
             response_text = ml_answer
+        # Check chatbot profile questions first (identity, capabilities, creator, etc.)
+        profile_answer = get_chatbot_profile(text)
+        if profile_answer:
+            response_text = profile_answer
+        # Then check the general knowledge base
+        elif (kb_answer := get_answer(text)):
+            response_text = kb_answer
         else:
             response_text = "I heard you. Please repeat your command."
     tts_error = None

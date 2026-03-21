@@ -27,6 +27,7 @@
 21. [Accreditation and Recognition](#accreditation-and-recognition) - 1 query
 22. [Research](#research) - 1 query
 23. [Miscellaneous](#miscellaneous) - 8 queries
+24. [Chatbot & Personal Development](#chatbot--personal-development) - 30 queries
 
 ---
 
@@ -285,14 +286,59 @@
 
 ---
 
+## Chatbot & Personal Development
+**30 Questions**
+
+### Identity (5)
+1. ❓ Who are you?
+2. ❓ What is your name?
+3. ❓ Tell me about yourself
+4. ❓ What are you?
+5. ❓ Introduce yourself
+
+### Capabilities (8)
+6. ❓ What can you do?
+7. ❓ What are your features?
+8. ❓ What are your capabilities?
+9. ❓ What can you help with?
+10. ❓ What are you able to do?
+11. ❓ List your features
+12. ❓ What commands can I give?
+13. ❓ What is your functionality?
+
+### Creator / Developer (5)
+14. ❓ Who made you?
+15. ❓ Who created you?
+16. ❓ Who is your developer?
+17. ❓ Who built you?
+18. ❓ Tell me about your creator
+
+### Collaboration & Purpose (6)
+19. ❓ What can we do together?
+20. ❓ How can you help me?
+21. ❓ What is your purpose?
+22. ❓ How can I use you?
+23. ❓ How do I interact with you?
+24. ❓ What should I ask you?
+
+### Help & Guidance (6)
+25. ❓ Help me get started
+26. ❓ How do I use you?
+27. ❓ What should I know?
+28. ❓ Guide me
+29. ❓ Tell me more about you
+30. ❓ How do I talk to you?
+
+---
+
 ## 📊 Summary Statistics
 
 | Metric | Count |
 |--------|-------|
-| **Total Questions** | **117** |
-| **Total Categories** | **23** |
-| **Largest Category** | Library (10 Q) |
-| **Multiple Category Questions** | 15 (General Info), 10 (Library) |
+| **Total Questions** | **147** |
+| **Total Categories** | **24** |
+| **Largest Category** | Chatbot & Personal Development (30 Q) |
+| **NPGC Info Categories** | 23 |
 | **System Status** | ✅ Production Ready |
 
 ---
@@ -304,8 +350,9 @@ Users can ask these questions in multiple ways:
 - **Variations:** "Tell me about NPGC", "What does NPGC stand for?"
 - **Casual:** "NPGC details?"
 - **Partial match:** "University affiliation?" → (Matches to "Which university is NPGC affiliated to?")
+- **Identity questions:** "Who are you?", "What can you do?", "Who made you?"
 
-The system uses **intelligent fuzzy matching** to understand variations and return accurate answers with confidence scoring.
+The system uses **intelligent fuzzy matching** to understand variations and return accurate answers with confidence scoring. Identity and personal-development questions are handled by a dedicated `chatbot_profile.py` module before the general knowledge base is consulted.
 
 ---
 
@@ -318,6 +365,6 @@ The system uses **intelligent fuzzy matching** to understand variations and retu
 
 ---
 
-**Last Updated:** March 18, 2026  
+**Last Updated:** March 21, 2026  
 **System:** ChetanTheRobot Advanced Q&A  
 **Status:** 🚀 Production Ready
