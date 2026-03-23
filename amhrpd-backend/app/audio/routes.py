@@ -8,6 +8,9 @@ from app.audio.prefix_gate import has_valid_prefix
 from app.audio.commandcheck import match_command
 from app.audio.knowledge_base import get_answer
 from app.audio.chatbot_profile import get_chatbot_profile
+from app.audio.language_detector import detect_language
+from app.audio.multilingual_knowledge_base import get_answer_multilingual
+from app.audio.multilingual_tts import tts_to_pcm_multilingual
 from app.dependencies import get_connection_manager
 
 router = APIRouter(prefix="/api/audio", tags=["Audio"])
@@ -79,7 +82,6 @@ async def upload_audio(
         response_text = f"Executing {command_name}. Anything else?"
     elif prefix_ok:
         # Detect language and handle multilingual query
-        lang_info = detect_language(text)
         ml_answer, response_lang = get_answer_multilingual(text)
         if ml_answer:
             response_text = ml_answer
