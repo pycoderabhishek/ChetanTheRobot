@@ -10,6 +10,7 @@ from app.audio.knowledge_base import get_answer
 from app.audio.chatbot_profile import get_chatbot_profile
 from app.audio.language_detector import detect_language
 from app.audio.multilingual_knowledge_base import get_answer_multilingual
+from app.audio.hindi_translator import translate_to_english, translate_to_hindi
 from app.audio.multilingual_tts import tts_to_pcm_multilingual
 from app.dependencies import get_connection_manager
 
@@ -81,19 +82,33 @@ async def upload_audio(
     elif prefix_ok and command_name:
         response_text = f"Executing {command_name}. Anything else?"
     elif prefix_ok:
-        # Detect language and handle multilingual query
-        ml_answer, response_lang = get_answer_multilingual(text)
-        if ml_answer:
-            response_text = ml_answer
-        # Check chatbot profile questions first (identity, capabilities, creator, etc.)
-        profile_answer = get_chatbot_profile(text)
+        # 1. Detect language of the incoming query
+        lang_info = detect_language(text)
+        response_lang = lang_info.get("primary_lang", "en")
+
+        # 2. Translate to English for searching if query is Hindi or code-mixed
+        search_query = text
+        if lang_info["language"] in ("hi", "code_mixed"):
+            search_query = translate_to_english(text, lang_info["language"])
+
+        # 3. Search knowledge bases with the (possibly translated) English query
+        profile_answer = get_chatbot_profile(search_query)
         if profile_answer:
             response_text = profile_answer
-        # Then check the general knowledge base
-        elif (kb_answer := get_answer(text)):
-            response_text = kb_answer
         else:
-            response_text = "I heard you. Please repeat your command."
+            # response_lang already set from detect_language above; ignore KB's lang return value
+            ml_answer, _ = get_answer_multilingual(search_query)
+            if ml_answer:
+                response_text = ml_answer
+            elif (kb_answer := get_answer(search_query)):
+                response_text = kb_answer
+            else:
+                response_text = "I heard you. Please repeat your command."
+
+        # 4. Translate response back to Hindi if the user queried in Hindi or Hinglish
+        if lang_info["language"] in ("hi", "code_mixed"):
+            response_text = translate_to_hindi(response_text)
+            response_lang = "hi"  # ensure TTS uses the Hindi voice
     tts_error = None
     pcm = b""
     try:
