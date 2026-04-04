@@ -24,6 +24,7 @@ from app.dependencies import (
 from app.persistence.database import init_db, get_db
 from app.persistence import crud
 from app.audio.routes import router as audio_router
+from app.audio.qa_router import router as qa_router
 from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
@@ -436,6 +437,7 @@ async def get_connection_history(
 
 app.include_router(api_router)
 app.include_router(audio_router)
+app.include_router(qa_router)
 
 # ================= SERVO CONTROLLER ROUTES (STEP 2) =================
 
