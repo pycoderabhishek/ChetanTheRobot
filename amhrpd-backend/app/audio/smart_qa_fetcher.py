@@ -216,7 +216,8 @@ class SmartQAFetcher:
         cached = self._lru.get(cache_key)
         if cached is not None:
             elapsed = (time.perf_counter() - t0) * 1000
-            self._monitor.record_query(query, elapsed, cached[0]["confidence"] if cached else 0.0, cache_hit=True)
+            top_conf = cached[0]["confidence"] if cached and len(cached) > 0 else 0.0
+            self._monitor.record_query(query, elapsed, top_conf, cache_hit=True)
             return cached
 
         # Stage 0b – semantic cache
@@ -225,7 +226,8 @@ class SmartQAFetcher:
             # Also populate LRU for future exact hits
             self._lru.set(cache_key, sem_cached)
             elapsed = (time.perf_counter() - t0) * 1000
-            self._monitor.record_query(query, elapsed, sem_cached[0]["confidence"] if sem_cached else 0.0, cache_hit=True)
+            top_conf = sem_cached[0]["confidence"] if sem_cached and len(sem_cached) > 0 else 0.0
+            self._monitor.record_query(query, elapsed, top_conf, cache_hit=True)
             return sem_cached
 
         # Stage 1-3 – full indexed search

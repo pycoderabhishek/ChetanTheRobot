@@ -41,6 +41,26 @@ _STOP_WORDS: Set[str] = {
     "about", "with", "from", "tell", "me", "us", "give", "my",
 }
 
+# ---------------------------------------------------------------------------
+# Scoring constants (extracted for easy tuning)
+# ---------------------------------------------------------------------------
+
+# Stage 1: bigram candidate threshold — item must share at least 1/BGRAM_THRESHOLD_DIVISOR
+# of the query bigrams to be included as a candidate.
+_BGRAM_THRESHOLD_DIVISOR = 4
+
+# Stage 2 (quick score): fast TF-IDF + bigram pass before running SequenceMatcher
+_QUICK_TFIDF_WEIGHT = 0.60
+_QUICK_BIGRAM_WEIGHT = 0.40
+
+# Stage 2 (full score): final scoring after SequenceMatcher
+_S2_TFIDF_WEIGHT = 0.45
+_S2_SEQUENCE_WEIGHT = 0.35
+_S2_BIGRAM_WEIGHT = 0.20
+
+# Stage 3: bonus applied when query tokens appear in the category label
+_CATEGORY_BOOST = 0.05
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -359,8 +379,8 @@ class OptimizedKnowledgeBase:
             for idx in self._ngram_index.get(bg, set()):
                 bg_hits[idx] += 1
 
-        # Include items sharing ≥2 bigrams with the query (or ≥1 if query is short)
-        threshold = max(1, len(bgs) // 4)
+        # Include items sharing ≥1/_BGRAM_THRESHOLD_DIVISOR of query bigrams (min 1)
+        threshold = max(1, len(bgs) // _BGRAM_THRESHOLD_DIVISOR)
         for idx, count in bg_hits.items():
             if count >= threshold:
                 candidates.add(idx)
@@ -398,7 +418,7 @@ class OptimizedKnowledgeBase:
         if q_norm in self._question_normalized[idx] or self._question_normalized[idx] in q_norm:
             return 1.0
 
-        return tfidf_score * 0.60 + bg_score * 0.40
+        return _QUICK_TFIDF_WEIGHT * tfidf_score + _QUICK_BIGRAM_WEIGHT * bg_score
 
     def _stage2_score(self, query: str, idx: int) -> float:
         """
@@ -426,7 +446,7 @@ class OptimizedKnowledgeBase:
         else:
             bg_score = 0.0
 
-        return tfidf_score * 0.45 + seq_score * 0.35 + bg_score * 0.20
+        return _S2_TFIDF_WEIGHT * tfidf_score + _S2_SEQUENCE_WEIGHT * seq_score + _S2_BIGRAM_WEIGHT * bg_score
 
     def _stage3_boost(self, query: str, item: Dict, base_conf: float) -> float:
         """
@@ -437,7 +457,7 @@ class OptimizedKnowledgeBase:
         query_toks = _tokens(query)
         cat_toks = _tokens(category)
         if set(query_toks) & set(cat_toks):
-            return min(base_conf + 0.05, 1.0)
+            return min(base_conf + _CATEGORY_BOOST, 1.0)
         return base_conf
 
 
