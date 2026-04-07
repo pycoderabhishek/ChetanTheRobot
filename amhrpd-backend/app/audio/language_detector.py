@@ -27,7 +27,6 @@ _HINGLISH_WORDS = {
     'milta', 'milti', 'milte', 'mile',
     'deta', 'deti', 'dete', 'diya',
     'lena', 'lelo', 'le',
-    'course', 'courses', 'college', 'admission', 'fees', 'fee',
     'kitna', 'kitni', 'kitne',
     'wala', 'wali', 'wale',
     'sirf', 'bas',

@@ -11,11 +11,14 @@ Flow:
 """
 
 import json
+import logging
 import os
 from typing import Optional, Tuple, List, Dict, Any
 
 from app.audio.language_detector import detect_language, get_response_language
 from app.audio.hindi_translator import translate_to_english, translate_to_hindi
+
+logger = logging.getLogger(__name__)
 
 # Path to the optional multilingual Q&A dataset
 _MULTILINGUAL_DB_FILE = os.path.join(
@@ -42,17 +45,24 @@ def _load_multilingual_db() -> List[Dict]:
             data = json.load(fh)
             _multilingual_db = data if isinstance(data, list) else []
     except Exception as exc:
-        print(f"Warning: could not load multilingual DB: {exc}")
+        logger.warning("Could not load multilingual DB: %s", exc)
         _multilingual_db = []
 
     return _multilingual_db
 
 
-def _search_multilingual_db(query: str, lang_info: Dict[str, Any]) -> Optional[str]:
+def _search_multilingual_db(
+    query: str,
+    lang_info: Dict[str, Any],
+    response_lang: str = "en",
+) -> Optional[str]:
     """
     Search the multilingual dataset for a direct match.
     Checks Hinglish variants and Hindi queries directly.
-    Returns the English answer if found, else None.
+
+    Returns the answer in *response_lang* when a pre-authored translation
+    exists (``answer_hi`` for Hindi), falling back to ``answer_en``.
+    Returns None if no match meets the confidence threshold.
     """
     from difflib import SequenceMatcher
 
@@ -79,7 +89,11 @@ def _search_multilingual_db(query: str, lang_info: Dict[str, Any]) -> Optional[s
             score = SequenceMatcher(None, query_lower, candidate.lower().strip()).ratio()
             if score > best_score:
                 best_score = score
-                best_answer = entry.get("answer_en", "")
+                # Prefer pre-authored Hindi answer when the user wants Hindi
+                if response_lang == "hi" and entry.get("answer_hi"):
+                    best_answer = entry["answer_hi"]
+                else:
+                    best_answer = entry.get("answer_en", "")
 
     if best_score >= 0.55 and best_answer:
         return best_answer
@@ -122,7 +136,7 @@ def search_qa_multilingual(query: str, top_k: int = 3) -> List[Dict[str, Any]]:
         results = []
 
     # Also try multilingual dataset
-    ml_answer = _search_multilingual_db(query, lang_info)
+    ml_answer = _search_multilingual_db(query, lang_info, response_lang=response_lang)
     if ml_answer and not any(r["answer"] == ml_answer for r in results):
         results.insert(0, {
             "question": query,
@@ -166,8 +180,9 @@ def get_answer_multilingual(query: str) -> Tuple[Optional[str], str]:
     if lang_info["language"] in ("hi", "code_mixed"):
         search_query = translate_to_english(query, lang_info["language"])
 
-    # Try multilingual dataset first
-    answer = _search_multilingual_db(query, lang_info)
+    # Try multilingual dataset first (returns answer already in response_lang when possible)
+    answer = _search_multilingual_db(query, lang_info, response_lang=response_lang)
+    from_multilingual_db = answer is not None
 
     # Fall back to main knowledge base (lazy import for test-stub compatibility)
     if not answer:
@@ -177,8 +192,10 @@ def get_answer_multilingual(query: str) -> Tuple[Optional[str], str]:
     if not answer:
         return None, response_lang
 
-    # Translate response to Hindi if user prefers Hindi
-    if response_lang == "hi":
+    # Translate response to Hindi if user prefers Hindi.
+    # Skip translation when the answer already came from the multilingual dataset's
+    # answer_hi field (to avoid translating pre-authored Hindi back through the API).
+    if response_lang == "hi" and not from_multilingual_db:
         answer = translate_to_hindi(answer)
 
     return answer, response_lang

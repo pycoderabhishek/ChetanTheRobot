@@ -93,20 +93,25 @@ async def upload_audio(
 
         # 3. Search knowledge bases with the (possibly translated) English query
         profile_answer = get_chatbot_profile(search_query)
+        needs_translation = True
         if profile_answer:
             response_text = profile_answer
         else:
-            # response_lang already set from detect_language above; ignore KB's lang return value
-            ml_answer, _ = get_answer_multilingual(search_query)
+            # Pass original text so get_answer_multilingual can match
+            # Hindi/Hinglish variants in the multilingual dataset directly.
+            ml_answer, ml_lang = get_answer_multilingual(text)
             if ml_answer:
                 response_text = ml_answer
+                response_lang = ml_lang or response_lang
+                # Answer is already in the user's preferred language; skip step 4.
+                needs_translation = False
             elif (kb_answer := get_answer(search_query)):
                 response_text = kb_answer
             else:
                 response_text = "I heard you. Please repeat your command."
 
         # 4. Translate response back to Hindi if the user queried in Hindi or Hinglish
-        if lang_info["language"] in ("hi", "code_mixed"):
+        if needs_translation and lang_info["language"] in ("hi", "code_mixed"):
             response_text = translate_to_hindi(response_text)
             response_lang = "hi"  # ensure TTS uses the Hindi voice
     tts_error = None
@@ -135,7 +140,8 @@ async def upload_audio(
         "confidence": confidence,
         "manual": manual,
         "level": level,
-        "threshold": threshold
+        "threshold": threshold,
+        "tts_error": tts_error,
     })
     if len(AUDIO_LOGS) > MAX_AUDIO_LOGS:
         del AUDIO_LOGS[:len(AUDIO_LOGS) - MAX_AUDIO_LOGS]
@@ -197,7 +203,8 @@ async def notify(device_id: str, text: str, samplerate: int = 16000):
     tts_error = None
     pcm = b""
     try:
-        pcm = tts_to_pcm(text, samplerate)
+        notify_lang = detect_language(text).get("primary_lang", "en")
+        pcm = tts_to_pcm_multilingual(text, language=notify_lang, samplerate=samplerate)
     except Exception as exc:
         tts_error = str(exc)
         logger.exception("TTS failed for notify")

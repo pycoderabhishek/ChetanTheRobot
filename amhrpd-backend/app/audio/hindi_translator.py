@@ -6,8 +6,11 @@ Primary: deep_translator (Google Translate, no API key needed)
 Fallback: custom Hinglish→English dictionary
 """
 
+import logging
 import re
 from typing import Optional, Dict
+
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Custom Hinglish → English phrase/word dictionary
@@ -129,10 +132,8 @@ def translate_to_english(text: str, source_lang: str = "auto") -> str:
         translated = GoogleTranslator(source=src, target="en").translate(text.strip())
         if translated and translated.strip():
             return translated.strip()
-    except Exception:
-        pass
-
-    # Fallback: normalize Hinglish using the dictionary
+    except Exception as exc:
+        logger.warning("deep_translator (to English) failed: %s", exc)
     return normalize_hinglish(text)
 
 
@@ -157,8 +158,8 @@ def translate_to_hindi(text: str) -> str:
         translated = GoogleTranslator(source="en", target="hi").translate(text.strip())
         if translated and translated.strip():
             return translated.strip()
-    except Exception:
-        pass
+    except Exception as exc:
+        logger.warning("deep_translator (to Hindi) failed: %s", exc)
 
     # If translation fails, return original English text
     return text
@@ -186,6 +187,10 @@ def normalize_hinglish(text: str) -> str:
         replacement = _HINGLISH_DICT[hindi_phrase]
         result = pattern.sub(replacement, result)
 
-    # Collapse multiple spaces
+    # Strip any remaining Devanagari characters that could not be transliterated,
+    # so the knowledge base never receives untranslatable script when
+    # deep_translator is unavailable.
+    result = re.sub(r'[\u0900-\u097F]+', '', result)
+    # Collapse any double spaces created by substitutions or Devanagari removal.
     result = re.sub(r'\s+', ' ', result).strip()
     return result
