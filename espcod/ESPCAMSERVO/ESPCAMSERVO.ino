@@ -46,7 +46,15 @@ const char WAKE_WORD[] = "HI CHETAN";
 const int AUDIO_SAMPLE_RATE    = 16000;
 const int AUDIO_BITS_PER_SAMPLE = 16;
 const int AUDIO_CHANNELS        = 1;
-const int RECORD_SECONDS        = 20;
+
+// ============================== SMART RECORDING CONFIG ==============================
+// Records only while the user speaks, stops after 1 s of silence (min 4 s, max 20 s).
+
+const int SMART_FRAME_SAMPLES  = 512;   // 32 ms per frame at 16 kHz
+const int SMART_MIN_SECONDS    = 4;     // Minimum recording duration (seconds)
+const int SMART_MAX_SECONDS    = 20;    // Maximum recording duration / safety limit
+const int SMART_SILENCE_FRAMES = 32;    // Consecutive silent frames (~1 s) → speech ended
+const int SMART_SILENCE_MARGIN = 200;   // Energy above ambient to treat frame as speech
 
 const int I2S_BCLK_PIN = 4;
 const int I2S_LRC_PIN  = 5;
@@ -88,6 +96,7 @@ const unsigned long HEARTBEAT_INTERVAL = 5000;
 unsigned long last_wake_time  = 0;
 uint32_t      last_wake_level = 0;
 int           wake_threshold  = WAKE_THRESHOLD_MIN;
+uint32_t      ambient_noise_level = 0;  // Measured during calibration, used for silence detection
 
 unsigned long last_ws_attempt = 0;
 const unsigned long WS_RECONNECT_INTERVAL = 5000;
@@ -289,6 +298,7 @@ void calibrate_wake_threshold() {
     if (count > 0) total += energy / count;
   }
   uint32_t avg     = frames > 0 ? total / frames : 0;
+  ambient_noise_level = avg;  // Store for smart silence detection
   uint32_t desired = avg + WAKE_MARGIN;
   if (desired < (uint32_t)WAKE_THRESHOLD_MIN) desired = WAKE_THRESHOLD_MIN;
   wake_threshold = (int)desired;
@@ -403,6 +413,78 @@ bool record_audio(uint8_t* buffer, size_t total_bytes) {
     }
   }
   return true;
+}
+
+// ============================== SMART RECORDING ==============================
+
+// Returns the mean absolute amplitude of a frame (simple energy proxy).
+// Max possible accumulation: SMART_FRAME_SAMPLES(512) * INT16_MAX(32767) = 16,777,216
+// which is well within uint32_t range — no overflow risk.
+uint32_t calculate_frame_energy(int16_t* samples, int count) {
+  if (count <= 0) return 0;
+  uint32_t energy = 0;
+  for (int i = 0; i < count; i++) {
+    energy += (uint32_t)abs(samples[i]);
+  }
+  return energy / count;
+}
+
+// Adaptive recording: records until 1 s of silence is detected (after the
+// minimum duration) or the hard maximum is reached.  Returns the number of
+// bytes actually captured (always a multiple of the frame byte size).
+size_t record_audio_smart(uint8_t* buffer, size_t max_bytes) {
+  const int    frame_bytes = SMART_FRAME_SAMPLES * (AUDIO_BITS_PER_SAMPLE / 8);
+  const int    max_frames  = (int)(max_bytes / frame_bytes);
+  // Clamp min_frames so it never exceeds the allocated buffer.
+  const int    min_frames  = min((SMART_MIN_SECONDS * AUDIO_SAMPLE_RATE) / SMART_FRAME_SAMPLES,
+                                 max_frames);
+  const uint32_t silence_threshold = ambient_noise_level + SMART_SILENCE_MARGIN;
+
+  int    silence_frames = 0;
+  int    total_frames   = 0;
+  size_t offset         = 0;
+
+  Serial.printf("[AUDIO] Smart recording: min=%ds max=%ds silence_thresh=%u\n",
+                SMART_MIN_SECONDS, SMART_MAX_SECONDS, silence_threshold);
+
+  while (total_frames < max_frames) {
+    size_t bytes_read = 0;
+    esp_err_t err = i2s_read(I2S_PORT, buffer + offset, (size_t)frame_bytes,
+                             &bytes_read, portMAX_DELAY);
+    if (err != ESP_OK || bytes_read == 0) break;
+
+    uint32_t energy = calculate_frame_energy((int16_t*)(buffer + offset),
+                                             (int)(bytes_read / 2));  // 2 bytes per 16-bit sample
+    offset += bytes_read;
+    total_frames++;
+
+    if (energy < silence_threshold) {
+      silence_frames++;
+    } else {
+      silence_frames = 0;
+    }
+
+    // Stop once minimum duration is met and 1 s of silence has elapsed.
+    if (total_frames >= min_frames && silence_frames >= SMART_SILENCE_FRAMES) {
+      Serial.printf("[AUDIO] Speech end detected at frame %d (%.1fs)\n",
+                    total_frames,
+                    total_frames * SMART_FRAME_SAMPLES / (float)AUDIO_SAMPLE_RATE);
+      break;
+    }
+
+    // Keep WebSocket alive during recording.
+    webSocket.loop();
+    if (system_state == WS_CONNECTED && millis() - last_heartbeat > HEARTBEAT_INTERVAL) {
+      send_heartbeat();
+      last_heartbeat = millis();
+    }
+  }
+
+  Serial.printf("[AUDIO] Smart record done: %d frames = %.1fs (%u bytes)\n",
+                total_frames,
+                total_frames * SMART_FRAME_SAMPLES / (float)AUDIO_SAMPLE_RATE,
+                (unsigned)offset);
+  return offset;
 }
 
 // ============================== SERVO SETUP ==============================
@@ -732,37 +814,39 @@ void loop() {
 
     if (should_record) {
       last_wake_time = now;
-      size_t total_bytes = (size_t)AUDIO_SAMPLE_RATE * RECORD_SECONDS *
-                           (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
+      // Allocate a buffer sized for the maximum recording duration.
+      size_t max_bytes = (size_t)AUDIO_SAMPLE_RATE * SMART_MAX_SECONDS *
+                         (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
 
       Serial.printf("[AUDIO] Allocating %u bytes (Heap: %u, PSRAM: %u)\n",
-                    total_bytes, esp_get_free_heap_size(),
+                    max_bytes, esp_get_free_heap_size(),
                     heap_caps_get_free_size(MALLOC_CAP_SPIRAM));
 
-      uint8_t* pcm = (uint8_t*)heap_caps_malloc(total_bytes, MALLOC_CAP_SPIRAM);
+      uint8_t* pcm = (uint8_t*)heap_caps_malloc(max_bytes, MALLOC_CAP_SPIRAM);
 
       if (!pcm) {
         Serial.println("[AUDIO] PSRAM failed. Trying internal RAM (adaptive)...");
         size_t reduced_seconds = 5;
-        total_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds *
-                      (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
-        pcm = (uint8_t*)malloc(total_bytes);
+        max_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds *
+                    (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
+        pcm = (uint8_t*)malloc(max_bytes);
 
         if (!pcm) {
-          reduced_seconds = 3;
-          total_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds *
-                        (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
-          pcm = (uint8_t*)malloc(total_bytes);
+          reduced_seconds = SMART_MIN_SECONDS;
+          max_bytes = (size_t)AUDIO_SAMPLE_RATE * reduced_seconds *
+                      (AUDIO_BITS_PER_SAMPLE / 8) * AUDIO_CHANNELS;
+          pcm = (uint8_t*)malloc(max_bytes);
         }
 
         if (pcm) {
           Serial.printf("[AUDIO] Allocated %u sec (%u bytes) in internal RAM\n",
-                        reduced_seconds, total_bytes);
+                        reduced_seconds, max_bytes);
         }
       }
 
       if (pcm) {
-        if (record_audio(pcm, total_bytes)) {
+        size_t recorded_bytes = record_audio_smart(pcm, max_bytes);
+        if (recorded_bytes > 0) {
           prompt_waiting = true;
           notify_text("Sending voice to backend");
           wait_for_prompt(2000);
@@ -770,7 +854,7 @@ void loop() {
             send_heartbeat();
             last_heartbeat = millis();
           }
-          upload_audio(pcm, total_bytes, true);
+          upload_audio(pcm, recorded_bytes, true);
         }
         free(pcm);
       } else {
