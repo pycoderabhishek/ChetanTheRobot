@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "category": "Admission Schedule",
+    "query": "When will NPGC admission forms be available for 2026-27?",
+    "answer": "Admission forms for 2026-27 will be available from January 15, 2026. You can apply online at www.admission.npgc.in or in person at Counter No. 1 (College Administrative Block).",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "category": "Admission Schedule",
+    "query": "What is the last date to submit the admission form at NPGC?",
+    "answer": "The last date for submission of admission forms is May 31, 2026. Applications submitted after this date will not be accepted.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "category": "Eligibility",
+    "query": "What is the eligibility criteria for BCA admission at NPGC?",
+    "answer": "For BCA admission, you need to have passed 10+2 with a minimum of 50% aggregate marks and Mathematics or Computer Science as one of the subjects. SC/ST candidates get a 5% relaxation in marks.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "category": "Eligibility",
+    "query": "Am I eligible for B.Com (Hons.) if I didn't take Commerce in 12th?",
+    "answer": "No, for B.Com (Hons.), you must have either Commerce, Economics, or Mathematics as one of the subjects in 12th. Additionally, you need a minimum of 60% aggregate marks (55% for SC/ST).",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "category": "Entrance Exam",
+    "query": "When will the LUACMAT entrance examination be held in 2026?",
+    "answer": "The LUACMAT entrance examination will be held on June 23-25, 2026. Different courses have exams on different dates and times. For example, BAJMC is on June 23, while BCA and B.Com (Hons.) are on June 25.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 6,
+    "category": "Entrance Exam",
+    "query": "What is the exam pattern for BBA entrance test at NPGC?",
+    "answer": "BBA entrance test consists of 2 papers, each of 60 minutes duration with 75 MCQ questions. Total questions are 150. There is no negative marking. Questions cover: GS/GK/Maths (40%), Commerce & Management (20%), Science (20%), and English (20%).",
+    "difficulty": "hard"
+  },
+  {
+    "id": 7,
+    "category": "Fees",
+    "query": "What is the total fee for BBA course at NPGC for all semesters?",
+    "answer": "BBA fee at NPGC is ₹34,500 per semester. For a 3-year 6-semester program, the total course fee is approximately ₹207,000. However, additional charges like caution money and university exam fees apply.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "category": "Fees",
+    "query": "Is B.Com (ACCA) more expensive than regular B.Com at NPGC?",
+    "answer": "Yes, B.Com (ACCA) is significantly more expensive. B.Com (ACCA) costs ₹60,000 per semester, while regular B.Com (Hons.) costs ₹28,600 per semester. The higher fee is due to ACCA training and international certification.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "category": "Courses",
+    "query": "What is the difference between BBA and BBA (Digital Business)?",
+    "answer": "BBA focuses on traditional business administration covering accounting, finance, marketing, and management. BBA (Digital Business) focuses on digital marketing, digital finance management, and IT skills for handling digital business. Both are 3-year programs with similar eligibility criteria.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 10,
+    "category": "Admission Process",
+    "query": "What documents do I need to bring at counselling?",
+    "answer": "You need: Original & photocopies of 10th & 12th mark sheets/certificates, Character Certificate, Transfer Certificate, Caste Certificate (if applicable), and a Pay Order/Demand Draft for the course fee plus ₹500 counselling fee. Mark sheet copies must be self-attested.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 11,
+    "category": "Courses",
+    "query": "What is B.Voc. and how is it different from regular degree courses?",
+    "answer": "B.Voc. (Bachelor of Vocational) is a skill-based degree program under Deen Dayal Upadhyay KAUSHAL Kendra. It combines academic learning with practical training and internships. Programs include Software Development, Banking & Finance, and paramedical courses. They offer multiple exit options after each year.",
+    "difficulty": "hard"
+  },
+  {
+    "id": 12,
+    "category": "Fees",
+    "query": "Can I pay admission fees online at NPGC?",
+    "answer": "Yes, admission fees can be paid through multiple methods: Pay Order/DD, online through www.npgc.in, QR Code, Debit/Credit Card, or Internet Banking (banking service charges applicable).",
+    "difficulty": "easy"
+  },
+  {
+    "id": 13,
+    "category": "Seats",
+    "query": "How many seats are available in BBA at NPGC?",
+    "answer": "NPGC has 120 seats in BBA under LUACMAT 2026. Additionally, NPGC has 60 seats in BBA (Digital Business). These are proportionally distributed across general and reserved categories as per government reservation policy.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 14,
+    "category": "Eligibility",
+    "query": "If I passed 10th class before 2022, can I take admission in NPGC?",
+    "answer": "No, you are not eligible for undergraduate programs at NPGC if you passed your 10th class examination before 2022. This is a mandatory requirement by the college.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 15,
+    "category": "Entrance Exam",
+    "query": "Will there be negative marking in LUACMAT 2026?",
+    "answer": "No, there will be no negative marking in any LUACMAT entrance examination for 2026. You only get marks for correct answers; no marks are deducted for wrong answers.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 16,
+    "category": "Courses",
+    "query": "Does NPGC offer Bachelor in Public Health (BPH) program?",
+    "answer": "Yes, NPGC offers BPH (Bachelor in Public Health), a 3-year program designed for students interested in community health and healthcare management. The fee is ₹32,000 per year. Eligibility: 10+2 passed with 50% aggregate marks (45% for SC/ST).",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "category": "Results & Counselling",
+    "query": "When will LUACMAT 2026 results be declared?",
+    "answer": "LUACMAT 2026 results are tentatively scheduled to be declared on July 2, 2026. Counselling dates will be announced at the time of the entrance examination. Admit cards will be issued before the exam.",
+    "difficulty": "easy"
+  },
+  {
+    "id": 18,
+    "category": "Fees",
+    "query": "Can I get a refund if I cancel my admission within 7 days?",
+    "answer": "Yes, you can request cancellation and fee refund within 7 days from the date of fee payment to NPGC. After 7 days, you must contact your allotted college for refund requests, which are subject to their policies. NPGC will only process refunds within 7 days.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 19,
+    "category": "SC/ST Relaxation",
+    "query": "What are the relaxations for SC/ST candidates in NPGC admission?",
+    "answer": "SC/ST candidates get a 5% relaxation in the minimum aggregate marks required across all programs. For example, if a general candidate needs 50% marks, SC/ST candidates need 45%. This applies to all LUACMAT and LUACCET programs at NPGC.",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "category": "Courses",
+    "query": "What are the paramedical B.Voc. courses offered at NPGC?",
+    "answer": "NPGC offers 5 paramedical B.Voc. programs through the Centre of Vocational and Futuristic Studies: Medical Lab Technology, Operation Theatre Technology, Physiotherapy, Hospital Management, and Hotel Management. These programs combine academic learning with practical training and internships.",
+    "difficulty": "hard"
+  }
+]

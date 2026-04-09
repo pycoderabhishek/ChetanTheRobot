@@ -1,0 +1,400 @@
+{
+  "undergraduate": {
+    "category": "Under-Graduate Courses",
+    "duration": "3 Years",
+    "courses": [
+      {
+        "id": 1,
+        "course_name": "B.A.",
+        "course_code": "BA",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["Hindi", "English"],
+        "type": "General"
+      },
+      {
+        "id": 2,
+        "course_name": "B.Com.",
+        "course_code": "BCOM",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["Hindi", "English"],
+        "type": "General"
+      },
+      {
+        "id": 3,
+        "course_name": "B.Sc.",
+        "course_code": "BSC",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["Hindi", "English"],
+        "type": "General"
+      },
+      {
+        "id": 4,
+        "course_name": "B.B.A.",
+        "course_code": "BBA",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional"
+      },
+      {
+        "id": 5,
+        "course_name": "B.B.A. (Digital Business)",
+        "course_code": "BBA-DB",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional",
+        "specialization": "Digital Business"
+      },
+      {
+        "id": 6,
+        "course_name": "B.C.A.",
+        "course_code": "BCA",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional"
+      },
+      {
+        "id": 7,
+        "course_name": "B.Com. - Hons.",
+        "course_code": "BCOM-HONS",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional"
+      },
+      {
+        "id": 8,
+        "course_name": "B.Com. - eCommerce",
+        "course_code": "BCOM-ECOM",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional",
+        "specialization": "E-Commerce"
+      },
+      {
+        "id": 9,
+        "course_name": "B.Voc. (Software Development & E-Governance)",
+        "course_code": "BVOC-SD-EG",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Vocational",
+        "specialization": "Software Development & E-Governance"
+      },
+      {
+        "id": 10,
+        "course_name": "B.Voc. (Banking & Finance)",
+        "course_code": "BVOC-BF",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Vocational",
+        "specialization": "Banking & Finance"
+      },
+      {
+        "id": 11,
+        "course_name": "B.A.J.M.C.",
+        "course_code": "BAJMC",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Professional",
+        "full_name": "Bachelor of Arts in Journalism & Mass Communication"
+      },
+      {
+        "id": 12,
+        "course_name": "B.P.H.",
+        "course_code": "BPH",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Professional",
+        "full_name": "Bachelor in Public Health"
+      },
+      {
+        "id": 13,
+        "course_name": "B.Com. - ACCA",
+        "course_code": "BCOM-ACCA",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional",
+        "specialization": "International Accounting & Finance with ACCA",
+        "note": "Integrated with ACCA certification"
+      },
+      {
+        "id": 14,
+        "course_name": "B.Com. - CFA",
+        "course_code": "BCOM-CFA",
+        "duration": "3 Years",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Professional",
+        "specialization": "Financial Analysis with CFA",
+        "note": "Integrated with CFA certification"
+      }
+    ]
+  },
+  "postgraduate": {
+    "category": "Post-Graduate Courses",
+    "duration": "2 Years",
+    "courses": [
+      {
+        "id": 1,
+        "course_name": "M.A./M.Sc. (Anthropology)",
+        "course_code": "MA-MSC-ANTH",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Anthropology"
+      },
+      {
+        "id": 2,
+        "course_name": "M.A. (Economics)",
+        "course_code": "MA-ECON",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Economics"
+      },
+      {
+        "id": 3,
+        "course_name": "M.A. (English)",
+        "course_code": "MA-ENG",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English"],
+        "type": "General",
+        "specialization": "English"
+      },
+      {
+        "id": 4,
+        "course_name": "M.A. (Geography)",
+        "course_code": "MA-GEO",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Geography"
+      },
+      {
+        "id": 5,
+        "course_name": "M.A. (Political Science)",
+        "course_code": "MA-PS",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Political Science"
+      },
+      {
+        "id": 6,
+        "course_name": "M.A. (Psychology)",
+        "course_code": "MA-PSYCH",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Psychology"
+      },
+      {
+        "id": 7,
+        "course_name": "M.Sc. (Chemistry)",
+        "course_code": "MSC-CHEM",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Chemistry"
+      },
+      {
+        "id": 8,
+        "course_name": "M.Sc. (Geoinformatics)",
+        "course_code": "MSC-GEO",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "General",
+        "specialization": "Geoinformatics"
+      },
+      {
+        "id": 9,
+        "course_name": "M.Com",
+        "course_code": "MCOM",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "Professional"
+      },
+      {
+        "id": 10,
+        "course_name": "M.Voc. (Software & E-governance)",
+        "course_code": "MVOC-SE",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English"],
+        "type": "Vocational",
+        "specialization": "Software & E-governance"
+      },
+      {
+        "id": 11,
+        "course_name": "M.Voc. (Banking, Stock & Insurance)",
+        "course_code": "MVOC-BSI",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English"],
+        "type": "Vocational",
+        "specialization": "Banking, Stock & Insurance"
+      },
+      {
+        "id": 12,
+        "course_name": "M.P.H.",
+        "course_code": "MPH",
+        "duration": "2 Years",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "Professional",
+        "full_name": "Master in Public Health"
+      }
+    ]
+  },
+  "diploma": {
+    "category": "Diploma Courses",
+    "duration": "1 Year",
+    "courses": [
+      {
+        "id": 1,
+        "course_name": "Advanced Diploma in Analytical Techniques & Instrumental Analysis",
+        "course_code": "ADIP-ANA",
+        "duration": "1 Year",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Advanced Diploma"
+      },
+      {
+        "id": 2,
+        "course_name": "Advanced Diploma in Data Analytics",
+        "course_code": "ADIP-DA",
+        "duration": "1 Year",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Advanced Diploma"
+      },
+      {
+        "id": 3,
+        "course_name": "Office Automation & E-Governance under Community College",
+        "course_code": "DIP-OA-EG",
+        "duration": "1 Year",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Community College Diploma"
+      },
+      {
+        "id": 4,
+        "course_name": "Banking & Finance under Community College",
+        "course_code": "DIP-BF",
+        "duration": "1 Year",
+        "eligibility": "12th",
+        "medium": ["English"],
+        "type": "Community College Diploma"
+      },
+      {
+        "id": 5,
+        "course_name": "Post Graduation Diploma in Retail Management",
+        "course_code": "PGDIP-RM",
+        "duration": "1 Year",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "Post Graduation Diploma"
+      },
+      {
+        "id": 6,
+        "course_name": "Post Graduation Diploma in Remote Sensing & GIS",
+        "course_code": "PGDIP-RS-GIS",
+        "duration": "1 Year",
+        "eligibility": "Graduation",
+        "medium": ["English", "Hindi"],
+        "type": "Post Graduation Diploma"
+      }
+    ]
+  },
+  "certification": {
+    "category": "Certification Courses",
+    "duration": "6 Months",
+    "courses": [
+      {
+        "id": 1,
+        "course_name": "Certificate Course in Forensic Science",
+        "course_code": "CERT-FS",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      },
+      {
+        "id": 2,
+        "course_name": "Certificate Course in Psychological Counseling",
+        "course_code": "CERT-PC",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      },
+      {
+        "id": 3,
+        "course_name": "Effective Communication in English",
+        "course_code": "CERT-ECE",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      },
+      {
+        "id": 4,
+        "course_name": "Certificate Course in Computer Science",
+        "course_code": "CERT-CS",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      },
+      {
+        "id": 5,
+        "course_name": "Introduction to Blockchain Technology and Application",
+        "course_code": "CERT-BTA",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      },
+      {
+        "id": 6,
+        "course_name": "Certificate in Robotics and Artificial Intelligence",
+        "course_code": "CERT-RAI",
+        "duration": "6 Months",
+        "eligibility": "12th",
+        "medium": ["English", "Hindi"],
+        "type": "Certificate Course"
+      }
+    ]
+  },
+  "summary": {
+    "total_courses": 51,
+    "undergraduate_count": 14,
+    "postgraduate_count": 12,
+    "diploma_count": 6,
+    "certification_count": 6,
+    "source": "https://www.npgc.in/",
+    "last_updated": "2026-04-09",
+    "college": "National Post Graduate College (NPGC)",
+    "location": "Lucknow, Uttar Pradesh, India"
+  }
+}
