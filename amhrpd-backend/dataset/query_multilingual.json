@@ -3,11 +3,7 @@
     "category": "General Information",
     "query_en": "What is NPGC?",
     "query_hi": "NPGC क्या है?",
-    "query_hinglish": [
-      "NPGC kya hai",
-      "NPGC ke baare mein batao",
-      "NPGC kya hota hai"
-    ],
+    "query_hinglish": ["NPGC kya hai", "NPGC ke baare mein batao", "NPGC kya hota hai"],
     "answer_en": "NPGC stands for National Post Graduate College, a premier educational institution located in Lucknow, Uttar Pradesh, India.",
     "answer_hi": "NPGC का अर्थ है नेशनल पोस्ट ग्रेजुएट कॉलेज, जो लखनऊ, उत्तर प्रदेश, भारत में स्थित एक प्रतिष्ठित शैक्षणिक संस्थान है।"
   },
@@ -15,11 +11,7 @@
     "category": "General Information",
     "query_en": "Where is NPGC located?",
     "query_hi": "NPGC कहाँ स्थित है?",
-    "query_hinglish": [
-      "NPGC kahan hai",
-      "NPGC kahan located hai",
-      "NPGC ka address kya hai"
-    ],
+    "query_hinglish": ["NPGC kahan hai", "NPGC kahan located hai", "NPGC ka address kya hai"],
     "answer_en": "National Post Graduate College is located at 2, Rana Pratap Marg, Lucknow - 226001, Uttar Pradesh, India.",
     "answer_hi": "नेशनल पोस्ट ग्रेजुएट कॉलेज 2, राणा प्रताप मार्ग, लखनऊ - 226001, उत्तर प्रदेश, भारत में स्थित है।"
   },
@@ -27,11 +19,7 @@
     "category": "General Information",
     "query_en": "When was NPGC established?",
     "query_hi": "NPGC की स्थापना कब हुई?",
-    "query_hinglish": [
-      "NPGC kab bana",
-      "NPGC ki sthapna kab hui",
-      "NPGC kab established hua"
-    ],
+    "query_hinglish": ["NPGC kab bana", "NPGC ki sthapna kab hui", "NPGC kab established hua"],
     "answer_en": "National Post Graduate College was established in the year 1974.",
     "answer_hi": "नेशनल पोस्ट ग्रेजुएट कॉलेज की स्थापना 1974 में हुई थी।"
   },
@@ -39,11 +27,7 @@
     "category": "Courses - Under Graduate",
     "query_en": "Does NPGC offer BCA?",
     "query_hi": "क्या NPGC BCA कोर्स देता है?",
-    "query_hinglish": [
-      "NPGC mein BCA course hai kya",
-      "BCA course available hai NPGC mein",
-      "BCA ke baare mein batao NPGC"
-    ],
+    "query_hinglish": ["NPGC mein BCA course hai kya", "BCA course available hai NPGC mein", "BCA ke baare mein batao NPGC"],
     "answer_en": "Yes, NPGC offers B.C.A. (Bachelor of Computer Applications) with 120 seats in the Computer faculty.",
     "answer_hi": "हाँ, NPGC कंप्यूटर फैकल्टी में 120 सीटों के साथ B.C.A. (बैचलर ऑफ कंप्यूटर एप्लीकेशन) प्रदान करता है।"
   },
@@ -51,11 +35,7 @@
     "category": "Courses - Under Graduate",
     "query_en": "What undergraduate courses does NPGC offer?",
     "query_hi": "NPGC में स्नातक कोर्स कौन से हैं?",
-    "query_hinglish": [
-      "NPGC mein kaunse UG courses hain",
-      "NPGC ke courses kya hain",
-      "undergraduate courses NPGC mein batao"
-    ],
+    "query_hinglish": ["NPGC mein kaunse UG courses hain", "NPGC ke courses kya hain", "undergraduate courses NPGC mein batao"],
     "answer_en": "NPGC offers B.A., B.Com., B.Sc., BCA, and BBA at the undergraduate level.",
     "answer_hi": "NPGC स्नातक स्तर पर B.A., B.Com., B.Sc., BCA और BBA प्रदान करता है।"
   },
@@ -63,11 +43,7 @@
     "category": "Courses - Post Graduate",
     "query_en": "What postgraduate courses are available at NPGC?",
     "query_hi": "NPGC में स्नातकोत्तर कोर्स कौन से हैं?",
-    "query_hinglish": [
-      "NPGC mein PG courses kya hain",
-      "postgraduate courses NPGC mein",
-      "MA MBA MCA NPGC mein hai kya"
-    ],
+    "query_hinglish": ["NPGC mein PG courses kya hain", "postgraduate courses NPGC mein", "MA MBA MCA NPGC mein hai kya"],
     "answer_en": "NPGC offers M.A., M.Com., M.Sc., MCA, and MBA at the postgraduate level.",
     "answer_hi": "NPGC स्नातकोत्तर स्तर पर M.A., M.Com., M.Sc., MCA और MBA प्रदान करता है।"
   },
@@ -75,11 +51,7 @@
     "category": "Admission",
     "query_en": "How can I get admission at NPGC?",
     "query_hi": "NPGC में प्रवेश कैसे लें?",
-    "query_hinglish": [
-      "NPGC mein admission kaise le",
-      "NPGC admission process kya hai",
-      "NPGC mein dakhila kaise hoga"
-    ],
+    "query_hinglish": ["NPGC mein admission kaise le", "NPGC admission process kya hai", "NPGC mein dakhila kaise hoga"],
     "answer_en": "Admissions at NPGC are done through the University of Lucknow's centralized admission portal. Visit www.npgc.in for details.",
     "answer_hi": "NPGC में प्रवेश लखनऊ विश्वविद्यालय के केंद्रीयकृत प्रवेश पोर्टल के माध्यम से होता है। विवरण के लिए www.npgc.in पर जाएँ।"
   },
@@ -87,11 +59,7 @@
     "category": "Admission",
     "query_en": "What is the last date for admission at NPGC?",
     "query_hi": "NPGC में प्रवेश की अंतिम तिथि क्या है?",
-    "query_hinglish": [
-      "NPGC admission last date kya hai",
-      "admission ki last date batao",
-      "NPGC mein admission kab tak hai"
-    ],
+    "query_hinglish": ["NPGC admission last date kya hai", "admission ki last date batao", "NPGC mein admission kab tak hai"],
     "answer_en": "Admission dates are announced by the University of Lucknow. Please check the official website www.npgc.in or the university portal for the latest dates.",
     "answer_hi": "प्रवेश तिथियां लखनऊ विश्वविद्यालय द्वारा घोषित की जाती हैं। नवीनतम तिथियों के लिए आधिकारिक वेबसाइट www.npgc.in देखें।"
   },
@@ -99,11 +67,7 @@
     "category": "Library",
     "query_en": "What facilities does the NPGC library offer?",
     "query_hi": "NPGC का पुस्तकालय क्या सुविधाएँ देता है?",
-    "query_hinglish": [
-      "NPGC library ke baare mein batao",
-      "library mein kya facilities hain",
-      "NPGC ki library kaisi hai"
-    ],
+    "query_hinglish": ["NPGC library ke baare mein batao", "library mein kya facilities hain", "NPGC ki library kaisi hai"],
     "answer_en": "NPGC has a well-equipped central library with a large collection of books, journals, digital resources, and reading rooms for students and staff.",
     "answer_hi": "NPGC में एक सुसज्जित केंद्रीय पुस्तकालय है जिसमें पुस्तकों, पत्रिकाओं, डिजिटल संसाधनों और छात्रों व कर्मचारियों के लिए पठन कक्ष हैं।"
   },
@@ -111,11 +75,7 @@
     "category": "Hostel",
     "query_en": "Does NPGC have a hostel?",
     "query_hi": "क्या NPGC में छात्रावास है?",
-    "query_hinglish": [
-      "NPGC mein hostel hai kya",
-      "hostel facility hai NPGC mein",
-      "NPGC hostel ke baare mein batao"
-    ],
+    "query_hinglish": ["NPGC mein hostel hai kya", "hostel facility hai NPGC mein", "NPGC hostel ke baare mein batao"],
     "answer_en": "Yes, NPGC has separate hostels for boys and girls. The girls' hostel can accommodate 155 students and the boys' hostel can accommodate 100 students.",
     "answer_hi": "हाँ, NPGC में छात्र और छात्राओं के लिए अलग-अलग छात्रावास हैं। छात्रा छात्रावास में 155 और छात्र छात्रावास में 100 विद्यार्थी रह सकते हैं।"
   },
@@ -123,11 +83,7 @@
     "category": "Principal",
     "query_en": "Who is the principal of NPGC?",
     "query_hi": "NPGC के प्रधानाचार्य कौन हैं?",
-    "query_hinglish": [
-      "NPGC ke principal kaun hain",
-      "NPGC ka principal kya naam hai",
-      "principal NPGC batao"
-    ],
+    "query_hinglish": ["NPGC ke principal kaun hain", "NPGC ka principal kya naam hai", "principal NPGC batao"],
     "answer_en": "The principal of NPGC is Prof. (Dr.) Poonam Tiwari.",
     "answer_hi": "NPGC की प्रधानाचार्या प्रो. (डॉ.) पूनम तिवारी हैं।"
   },
@@ -135,11 +91,7 @@
     "category": "Placements",
     "query_en": "How are placements at NPGC?",
     "query_hi": "NPGC में प्लेसमेंट कैसा है?",
-    "query_hinglish": [
-      "NPGC placement kaisa hai",
-      "placement ke baare mein batao",
-      "NPGC mein job milti hai kya"
-    ],
+    "query_hinglish": ["NPGC placement kaisa hai", "placement ke baare mein batao", "NPGC mein job milti hai kya"],
     "answer_en": "NPGC has a Training and Placement Cell that helps students with career guidance, campus recruitment, and internship opportunities. Contact: 9335519893.",
     "answer_hi": "NPGC में एक प्रशिक्षण एवं प्लेसमेंट सेल है जो छात्रों को करियर मार्गदर्शन, कैंपस भर्ती और इंटर्नशिप के अवसरों में मदद करता है। संपर्क: 9335519893।"
   },
@@ -147,11 +99,7 @@
     "category": "Contact Information",
     "query_en": "What is the phone number of NPGC?",
     "query_hi": "NPGC का फोन नंबर क्या है?",
-    "query_hinglish": [
-      "NPGC ka phone number kya hai",
-      "NPGC contact number batao",
-      "NPGC ko call kaise kare"
-    ],
+    "query_hinglish": ["NPGC ka phone number kya hai", "NPGC contact number batao", "NPGC ko call kaise kare"],
     "answer_en": "The phone number of National Post Graduate College is 0522 4021304.",
     "answer_hi": "नेशनल पोस्ट ग्रेजुएट कॉलेज का फोन नंबर 0522 4021304 है।"
   },
@@ -159,11 +107,7 @@
     "category": "Contact Information",
     "query_en": "What is the email of NPGC?",
     "query_hi": "NPGC का ईमेल क्या है?",
-    "query_hinglish": [
-      "NPGC ka email kya hai",
-      "NPGC email address batao",
-      "NPGC ko email kaise kare"
-    ],
+    "query_hinglish": ["NPGC ka email kya hai", "NPGC email address batao", "NPGC ko email kaise kare"],
     "answer_en": "The email address of NPGC is support@npgc.in",
     "answer_hi": "NPGC का ईमेल पता support@npgc.in है।"
   },
@@ -171,11 +115,7 @@
     "category": "Sports",
     "query_en": "What sports facilities does NPGC have?",
     "query_hi": "NPGC में खेल सुविधाएँ क्या हैं?",
-    "query_hinglish": [
-      "NPGC mein sports kya hain",
-      "khel suvidha NPGC mein hai kya",
-      "NPGC sports batao"
-    ],
+    "query_hinglish": ["NPGC mein sports kya hain", "khel suvidha NPGC mein hai kya", "NPGC sports batao"],
     "answer_en": "NPGC has sports facilities including a playground, indoor games room, and encourages students to participate in inter-college and national level competitions.",
     "answer_hi": "NPGC में खेल का मैदान, इनडोर खेल कक्ष जैसी सुविधाएँ हैं और छात्रों को अंतर-महाविद्यालय और राष्ट्रीय स्तर की प्रतियोगिताओं में भाग लेने के लिए प्रोत्साहित किया जाता है।"
   },
@@ -183,11 +123,7 @@
     "category": "Accreditation and Recognition",
     "query_en": "What is the NAAC grade of NPGC?",
     "query_hi": "NPGC की NAAC ग्रेड क्या है?",
-    "query_hinglish": [
-      "NPGC ki NAAC grade kya hai",
-      "NPGC ka grade batao",
-      "NPGC accreditation kya hai"
-    ],
+    "query_hinglish": ["NPGC ki NAAC grade kya hai", "NPGC ka grade batao", "NPGC accreditation kya hai"],
     "answer_en": "NPGC holds a Grade 'A' accreditation from NAAC (National Assessment and Accreditation Council).",
     "answer_hi": "NPGC को NAAC (राष्ट्रीय मूल्यांकन एवं प्रत्यायन परिषद) से Grade 'A' मान्यता प्राप्त है।"
   },
@@ -195,11 +131,7 @@
     "category": "Examination",
     "query_en": "How are examinations conducted at NPGC?",
     "query_hi": "NPGC में परीक्षाएं कैसे होती हैं?",
-    "query_hinglish": [
-      "NPGC mein exam kaise hota hai",
-      "exam system NPGC mein batao",
-      "pariksha NPGC mein kaisi hai"
-    ],
+    "query_hinglish": ["NPGC mein exam kaise hota hai", "exam system NPGC mein batao", "pariksha NPGC mein kaisi hai"],
     "answer_en": "NPGC conducts examinations under the University of Lucknow's examination system. As an autonomous college, it also has internal assessment components.",
     "answer_hi": "NPGC लखनऊ विश्वविद्यालय की परीक्षा प्रणाली के तहत परीक्षाएं आयोजित करता है। एक स्वायत्त महाविद्यालय के रूप में इसमें आंतरिक मूल्यांकन भी शामिल है।"
   },
@@ -207,11 +139,7 @@
     "category": "NCC and NSS",
     "query_en": "Does NPGC have NCC?",
     "query_hi": "क्या NPGC में NCC है?",
-    "query_hinglish": [
-      "NPGC mein NCC hai kya",
-      "NCC NPGC mein milta hai kya",
-      "NCC join karna hai NPGC mein"
-    ],
+    "query_hinglish": ["NPGC mein NCC hai kya", "NCC NPGC mein milta hai kya", "NCC join karna hai NPGC mein"],
     "answer_en": "Yes, NPGC has an active NCC (National Cadet Corps) unit that trains students in discipline, leadership, and service.",
     "answer_hi": "हाँ, NPGC में एक सक्रिय NCC (राष्ट्रीय कैडेट कोर) इकाई है जो छात्रों को अनुशासन, नेतृत्व और सेवा में प्रशिक्षित करती है।"
   },
@@ -219,11 +147,7 @@
     "category": "NCC and NSS",
     "query_en": "Does NPGC have NSS?",
     "query_hi": "क्या NPGC में NSS है?",
-    "query_hinglish": [
-      "NPGC mein NSS hai kya",
-      "NSS NPGC mein milta hai kya",
-      "NSS ke baare mein batao NPGC"
-    ],
+    "query_hinglish": ["NPGC mein NSS hai kya", "NSS NPGC mein milta hai kya", "NSS ke baare mein batao NPGC"],
     "answer_en": "Yes, NPGC has an NSS (National Service Scheme) unit that organizes community service and social welfare activities.",
     "answer_hi": "हाँ, NPGC में NSS (राष्ट्रीय सेवा योजना) इकाई है जो सामुदायिक सेवा और सामाजिक कल्याण गतिविधियाँ आयोजित करती है।"
   },
@@ -231,11 +155,7 @@
     "category": "Student Support",
     "query_en": "What student support services does NPGC provide?",
     "query_hi": "NPGC छात्रों को क्या सहायता सेवाएँ देता है?",
-    "query_hinglish": [
-      "NPGC mein student support kya hai",
-      "students ki help kaise hoti hai NPGC mein",
-      "NPGC student services batao"
-    ],
+    "query_hinglish": ["NPGC mein student support kya hai", "students ki help kaise hoti hai NPGC mein", "NPGC student services batao"],
     "answer_en": "NPGC provides counseling, scholarship guidance, grievance redressal, anti-ragging cell, and women's empowerment cell for student support.",
     "answer_hi": "NPGC छात्र सहायता के लिए परामर्श, छात्रवृत्ति मार्गदर्शन, शिकायत निवारण, एंटी-रैगिंग सेल और महिला सशक्तिकरण सेल प्रदान करता है।"
   },
@@ -243,11 +163,7 @@
     "category": "Infrastructure",
     "query_en": "What is the infrastructure of NPGC like?",
     "query_hi": "NPGC का बुनियादी ढाँचा कैसा है?",
-    "query_hinglish": [
-      "NPGC infrastructure kaisa hai",
-      "NPGC mein kya kya hai",
-      "NPGC buildings aur facilities batao"
-    ],
+    "query_hinglish": ["NPGC infrastructure kaisa hai", "NPGC mein kya kya hai", "NPGC buildings aur facilities batao"],
     "answer_en": "NPGC has modern classrooms, well-equipped laboratories, a central library, computer labs, an auditorium, canteen, sports ground, and separate hostels.",
     "answer_hi": "NPGC में आधुनिक कक्षाएं, सुसज्जित प्रयोगशालाएं, केंद्रीय पुस्तकालय, कंप्यूटर लैब, ऑडिटोरियम, कैंटीन, खेल मैदान और अलग छात्रावास हैं।"
   },
@@ -255,11 +171,7 @@
     "category": "Canteen",
     "query_en": "Does NPGC have a canteen?",
     "query_hi": "क्या NPGC में कैंटीन है?",
-    "query_hinglish": [
-      "NPGC mein canteen hai kya",
-      "khana kahan milega NPGC mein",
-      "NPGC canteen ke baare mein batao"
-    ],
+    "query_hinglish": ["NPGC mein canteen hai kya", "khana kahan milega NPGC mein", "NPGC canteen ke baare mein batao"],
     "answer_en": "Yes, NPGC has a canteen that provides food and beverages to students and staff at reasonable rates.",
     "answer_hi": "हाँ, NPGC में एक कैंटीन है जो छात्रों और कर्मचारियों को उचित दरों पर भोजन और पेय पदार्थ उपलब्ध कराती है।"
   },
@@ -267,11 +179,7 @@
     "category": "Vision and Mission",
     "query_en": "What is the vision of NPGC?",
     "query_hi": "NPGC का विजन क्या है?",
-    "query_hinglish": [
-      "NPGC ka vision kya hai",
-      "NPGC mission batao",
-      "NPGC ki vision mission kya hai"
-    ],
+    "query_hinglish": ["NPGC ka vision kya hai", "NPGC mission batao", "NPGC ki vision mission kya hai"],
     "answer_en": "The vision of NPGC is to be a center of excellence in education, research, and community service, nurturing students with knowledge, values, and skills.",
     "answer_hi": "NPGC का विजन शिक्षा, अनुसंधान और सामुदायिक सेवा में उत्कृष्टता का केंद्र बनना और ज्ञान, मूल्यों और कौशल के साथ छात्रों का पोषण करना है।"
   },
@@ -279,11 +187,7 @@
     "category": "Research",
     "query_en": "What research facilities does NPGC have?",
     "query_hi": "NPGC में अनुसंधान सुविधाएँ क्या हैं?",
-    "query_hinglish": [
-      "NPGC mein research hoti hai kya",
-      "research facilities NPGC mein batao",
-      "NPGC research department kya hai"
-    ],
+    "query_hinglish": ["NPGC mein research hoti hai kya", "research facilities NPGC mein batao", "NPGC research department kya hai"],
     "answer_en": "NPGC has dedicated research labs and faculty engaged in research activities. Students can also pursue research under faculty guidance.",
     "answer_hi": "NPGC में समर्पित अनुसंधान प्रयोगशालाएं और अनुसंधान कार्यों में लगे संकाय सदस्य हैं। छात्र भी संकाय मार्गदर्शन में अनुसंधान कर सकते हैं।"
   },
@@ -291,11 +195,7 @@
     "category": "General Information",
     "query_en": "What is the motto of NPGC?",
     "query_hi": "NPGC का आदर्श वाक्य क्या है?",
-    "query_hinglish": [
-      "NPGC ka motto kya hai",
-      "NPGC ka slogan kya hai",
-      "NPGC motto batao"
-    ],
+    "query_hinglish": ["NPGC ka motto kya hai", "NPGC ka slogan kya hai", "NPGC motto batao"],
     "answer_en": "The motto of the college is 'Maritum Ethicus', which means 'Merit with Ethics'.",
     "answer_hi": "महाविद्यालय का आदर्श वाक्य 'Maritum Ethicus' है, जिसका अर्थ है 'नैतिकता के साथ योग्यता'।"
   },
@@ -303,11 +203,7 @@
     "category": "Chatbot & Personal Development",
     "query_en": "Who are you?",
     "query_hi": "तुम कौन हो?",
-    "query_hinglish": [
-      "tum kaun ho",
-      "aap kaun hain",
-      "apne baare mein batao"
-    ],
+    "query_hinglish": ["tum kaun ho", "aap kaun hain", "apne baare mein batao"],
     "answer_en": "I am Chetan, an AI voice assistant designed to help students and visitors at NPGC. I can answer questions about college information, courses, admissions, and help control robot movements. I was created by Abhishek.",
     "answer_hi": "मैं चेतन हूँ, NPGC में छात्रों और आगंतुकों की मदद के लिए बनाया गया एक AI वॉयस असिस्टेंट। मैं कॉलेज की जानकारी, कोर्स, प्रवेश के बारे में सवालों का जवाब दे सकता हूँ। मुझे अभिषेक ने बनाया है।"
   },
@@ -315,11 +211,7 @@
     "category": "Chatbot & Personal Development",
     "query_en": "What can you do?",
     "query_hi": "तुम क्या कर सकते हो?",
-    "query_hinglish": [
-      "tum kya kar sakte ho",
-      "aap kya kar sakte hain",
-      "tumhari capabilities kya hain"
-    ],
+    "query_hinglish": ["tum kya kar sakte ho", "aap kya kar sakte hain", "tumhari capabilities kya hain"],
     "answer_en": "I can answer questions about NPGC courses, admissions, facilities, library, hostels, events, and placements. I can also execute movement commands like move forward, turn left, and stop.",
     "answer_hi": "मैं NPGC के कोर्स, प्रवेश, सुविधाएं, पुस्तकालय, छात्रावास, कार्यक्रम और प्लेसमेंट के बारे में सवालों का जवाब दे सकता हूँ। मैं आगे बढ़ो, बाएं मुड़ो और रुको जैसे आंदोलन कमांड भी चला सकता हूँ।"
   },
@@ -327,11 +219,7 @@
     "category": "Chatbot & Personal Development",
     "query_en": "Who made you?",
     "query_hi": "तुम्हें किसने बनाया?",
-    "query_hinglish": [
-      "tumhe kisne banaya",
-      "aapko kisne create kiya",
-      "tumhara creator kaun hai"
-    ],
+    "query_hinglish": ["tumhe kisne banaya", "aapko kisne create kiya", "tumhara creator kaun hai"],
     "answer_en": "I was created by Abhishek as an intelligent voice-controlled assistant for the Chetan Robot Project at NPGC.",
     "answer_hi": "मुझे अभिषेक ने NPGC में चेतन रोबोट प्रोजेक्ट के लिए एक बुद्धिमान वॉयस-कंट्रोल्ड असिस्टेंट के रूप में बनाया था।"
   },
@@ -339,11 +227,7 @@
     "category": "Chatbot & Personal Development",
     "query_en": "What can we do together?",
     "query_hi": "हम मिलकर क्या कर सकते हैं?",
-    "query_hinglish": [
-      "hum milkar kya kar sakte hain",
-      "what we can do",
-      "hum dono kya kar sakte hain"
-    ],
+    "query_hinglish": ["hum milkar kya kar sakte hain", "what we can do", "hum dono kya kar sakte hain"],
     "answer_en": "Together we can explore NPGC information, get answers to college-related queries, navigate the campus virtually, and even control the Chetan robot movements!",
     "answer_hi": "हम मिलकर NPGC की जानकारी जान सकते हैं, कॉलेज से जुड़े सवालों के जवाब पा सकते हैं, वर्चुअली कैंपस घूम सकते हैं और चेतन रोबोट को नियंत्रित भी कर सकते हैं!"
   },
@@ -351,56 +235,8 @@
     "category": "Chatbot & Personal Development",
     "query_en": "How can you help me?",
     "query_hi": "तुम मेरी कैसे मदद कर सकते हो?",
-    "query_hinglish": [
-      "tum meri kaise help kar sakte ho",
-      "mujhe help chahiye",
-      "kya tum help karoge"
-    ],
+    "query_hinglish": ["tum meri kaise help kar sakte ho", "mujhe help chahiye", "kya tum help karoge"],
     "answer_en": "I can help you with information about NPGC, its courses, admissions, facilities, events, and more. Just ask me any question!",
     "answer_hi": "मैं आपको NPGC, उसके कोर्स, प्रवेश, सुविधाएं, कार्यक्रम और अन्य जानकारी में मदद कर सकता हूँ। बस मुझसे कोई भी सवाल पूछें!"
-  },
-  {
-    "category": "Courses - Available",
-    "query_en": "What are all the courses available at NPGC?",
-    "query_hi": "NPGC में कौन कौन से पाठ्यक्रम उपलब्ध हैं?",
-    "query_hinglish": [
-      "NPGC mein konse konse courses available hain",
-      "NPGC ke sab courses batao"
-    ],
-    "answer_en": "NPGC offers 51 comprehensive courses across 4 categories. These include Under-Graduate (14), Post-Graduate (12), Diploma (6), and Certificate (6) programs.",
-    "answer_hi": "NPGC 4 श्रेणियों में 51 व्यापक पाठ्यक्रम प्रदान करता है।"
-  },
-  {
-    "category": "Courses - Available",
-    "query_en": "How many total courses does NPGC offer?",
-    "query_hi": "NPGC कुल कितने पाठ्यक्रम प्रदान करता है?",
-    "query_hinglish": [
-      "NPGC total kitne courses",
-      "NPGC ke total courses"
-    ],
-    "answer_en": "NPGC offers a total of 51 courses across all categories.",
-    "answer_hi": "NPGC सभी श्रेणियों में कुल 51 पाठ्यक्रम प्रदान करता है।"
-  },
-  {
-    "category": "Courses - Available",
-    "query_en": "What vocational courses does NPGC offer?",
-    "query_hi": "NPGC कौन से व्यावहारिक प्रशिक्षण पाठ्यक्रम प्रदान करता है?",
-    "query_hinglish": [
-      "NPGC vocational training",
-      "NPGC B.Voc courses"
-    ],
-    "answer_en": "NPGC offers B.Voc. and M.Voc. programs in Software Development, Banking & Finance, Medical Lab Technology, Physiotherapy.",
-    "answer_hi": "NPGC सॉफ्टवेयर विकास, बैंकिंग और वित्त, मेडिकल लैब तकनीकी में B.Voc. कार्यक्रम प्रदान करता है।"
-  },
-  {
-    "category": "Courses - Available",
-    "query_en": "Are there paramedical courses at NPGC?",
-    "query_hi": "क्या NPGC में पैरामेडिकल पाठ्यक्रम हैं?",
-    "query_hinglish": [
-      "NPGC paramedical courses",
-      "NPGC medical courses"
-    ],
-    "answer_en": "Yes, NPGC offers B.Voc. paramedical programs in Medical Lab Technology, Operation Theatre Technology, Physiotherapy.",
-    "answer_hi": "हाँ, NPGC मेडिकल लैब तकनीकी, ऑपरेशन थिएटर तकनीकी, फिजियोथेरेपी में B.Voc. कार्यक्रम प्रदान करता है।"
   }
 ]

@@ -78,9 +78,9 @@ def _calculate_similarity(query: str, target: str) -> float:
 def _tokenize_query(query: str) -> List[str]:
     """Extract keywords from query"""
     query = _normalize_text(query)
-    
-    stop_words = {'is', 'the', 'a', 'an', 'what', 'how', 'where', 'when', 'who', 'why', 'does', 'do', 'at', 'in', 'of', 'about', 'tell', 'me', 'can', 'are', 'and', 'or', 'to', 'for', 'from', 'your', 'you', 'i'}
-    tokens = [w for w in query.split() if w not in stop_words and len(w) > 2]  # Also filter short words
+    # Remove common stop words
+    stop_words = {'is', 'the', 'a', 'an', 'what', 'how', 'where', 'when', 'who', 'why', 'does', 'do', 'at', 'in', 'of'}
+    tokens = [w for w in query.split() if w not in stop_words]
     return tokens
 
 def search_qa_database(query: str, top_k: int = 3, min_confidence: float = 0.5) -> List[QAMatch]:
@@ -117,21 +117,13 @@ def search_qa_database(query: str, top_k: int = 3, min_confidence: float = 0.5) 
         token_matches = len(set(query_tokens) & set(question_tokens))
         token_score = token_matches / max(len(query_tokens), 1) if query_tokens else 0
         
-        # Strategy 3: Category-based boost (prefer category matches over chatbot category)
+        # Strategy 3: Category-based boost
         category_tokens = _tokenize_query(category)
         category_match = len(set(query_tokens) & set(category_tokens)) > 0
         
-        # Penalize chatbot category unless query is explicitly about chatbot
-        is_chatbot_query = category == "Chatbot & Personal Development"
-        is_user_asking_about_chatbot = any(word in query_normalized.lower() for word in ["chetan", "chatbot", "assistant", "robot", "creator", "developer", "yourself", "yourself", "help", "do"])
-        chatbot_penalty = 0.0 if (not is_chatbot_query or is_user_asking_about_chatbot) else -0.3
-        
-        # Combined confidence score (weighted average with penalties)
+        # Combined confidence score (weighted average)
         confidence = (question_similarity * 0.6 + token_score * 0.3 + 
-                     (0.1 if category_match else 0.0) + chatbot_penalty)
-        
-        # Ensure confidence stays in valid range
-        confidence = max(0.0, min(1.0, confidence))
+                     (0.1 if category_match else 0.0))
         
         if confidence >= min_confidence:
             matches.append(QAMatch(
@@ -156,13 +148,13 @@ def get_answer(query: str) -> Optional[str]:
     if not query or not query.strip():
         return None
     
-    # Search Q&A database with stricter minimum confidence
-    matches = search_qa_database(query, top_k=1, min_confidence=0.55)
+    # Search Q&A database
+    matches = search_qa_database(query, top_k=1, min_confidence=0.45)
     
     if matches:
         best_match = matches[0]
-        # Return answer only if confidence is high enough (stricter threshold)
-        if best_match.confidence >= 0.55:
+        # Return answer if confidence is reasonable
+        if best_match.confidence >= 0.45:
             return best_match.answer
     
     return None
@@ -175,7 +167,7 @@ def search_qa(query: str, top_k: int = 3) -> List[Dict]:
     Returns:
         List of dictionaries with question, answer, category, confidence
     """
-    matches = search_qa_database(query, top_k=top_k, min_confidence=0.50)
+    matches = search_qa_database(query, top_k=top_k, min_confidence=0.40)
     
     return [
         {
