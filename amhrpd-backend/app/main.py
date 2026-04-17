@@ -414,6 +414,68 @@ async def get_command_logs(
         ]
     }
 
+
+@api_router.get("/status")
+async def get_project_status(db: Session = Depends(get_db)):
+    """Get a comprehensive status summary of the project"""
+    from app.audio.routes import AUDIO_LOGS, TRANSCRIPT_LOGS
+
+    device_registry = get_device_registry()
+    all_devices = await device_registry.get_all_devices()
+
+    online_devices = [d for d in all_devices if d.is_online]
+    offline_devices = [d for d in all_devices if not d.is_online]
+
+    recent_commands = await crud.get_all_command_logs(db, limit=5)
+    recent_audio = list(AUDIO_LOGS)[-5:]
+    recent_transcripts = list(TRANSCRIPT_LOGS)[-5:]
+
+    with SYSTEM_LOGS_LOCK:
+        error_logs = [
+            x for x in SYSTEM_LOGS
+            if (x.get("level") or "").upper() in ("ERROR", "CRITICAL")
+        ][-5:]
+
+    return {
+        "status": "ok",
+        "timestamp": datetime.utcnow().isoformat(),
+        "app": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "devices": {
+            "total": len(all_devices),
+            "online": len(online_devices),
+            "offline": len(offline_devices),
+            "online_list": [
+                {
+                    "device_id": d.device_id,
+                    "device_type": d.device_type,
+                    "last_heartbeat": d.last_heartbeat.isoformat() if d.last_heartbeat else None,
+                }
+                for d in online_devices
+            ],
+        },
+        "commands": {
+            "recent": [
+                {
+                    "command_id": c.command_id,
+                    "device_type": c.device_type,
+                    "command_name": c.command_name,
+                    "status": c.status,
+                    "created_at": c.created_at.isoformat(),
+                }
+                for c in recent_commands
+            ]
+        },
+        "audio": {
+            "recent_logs": recent_audio,
+            "recent_transcripts": recent_transcripts,
+        },
+        "system": {
+            "recent_errors": error_logs,
+            "log_count": len(SYSTEM_LOGS),
+        },
+    }
+
 @api_router.get("/device-connection-history/{device_id}")
 async def get_connection_history(
     device_id: str,
